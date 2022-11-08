@@ -51,9 +51,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#agaveNectar -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#agave_nectar -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#agaveNectar">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#agave_nectar">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sweetener"/>
     </owl:Class>
     
@@ -109,9 +109,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#americanWhiskey -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#american_whiskey -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#americanWhiskey">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#american_whiskey">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey"/>
     </owl:Class>
     
@@ -139,9 +139,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#appleBrandy -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#apple_brandy -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#appleBrandy">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#apple_brandy">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#brandy"/>
     </owl:Class>
     
@@ -158,7 +158,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#applejack -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#applejack">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#appleBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#apple_brandy"/>
     </owl:Class>
     
 
@@ -166,7 +166,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#armagnac -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#armagnac">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy"/>
     </owl:Class>
     
 
@@ -174,7 +174,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#baijiu -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#baijiu">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit"/>
     </owl:Class>
     
 
@@ -187,10 +187,18 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#bataviaArrack -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#banana_leaf -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#bataviaArrack">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#banana_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#batavia_arrack -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#batavia_arrack">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit"/>
     </owl:Class>
     
 
@@ -220,17 +228,25 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blackstrapRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blackstrap_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blackstrapRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blackstrap_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blendedScotch -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blend -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blendedScotch">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blend">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blended_scotch -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#blended_scotch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#scotch"/>
     </owl:Class>
     
@@ -247,7 +263,13 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#bourbon -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#bourbon">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#americanWhiskey"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#american_whiskey"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#isIngedientOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey_sour"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -260,10 +282,18 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#build -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#build">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cachaca -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cachaca">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit"/>
     </owl:Class>
     
 
@@ -271,7 +301,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#calvados -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#calvados">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#appleBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#apple_brandy"/>
     </owl:Class>
     
 
@@ -292,10 +322,34 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_heering -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_heering">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fruit_liquour"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coca-cola -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coca-cola">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#soft_drinks"/>
     </owl:Class>
     
 
@@ -309,7 +363,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cognac -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cognac">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy"/>
     </owl:Class>
     
 
@@ -318,6 +372,46 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coke">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#soft_drinks"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#collins -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#collins">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#column_ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#column_ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coupe -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coupe">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coupette -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#coupette">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cracked_ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cracked_ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
     </owl:Class>
     
 
@@ -378,10 +472,42 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#crushed_ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#crushed_ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#crushed_ice_cap -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#crushed_ice_cap">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cubed_ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cubed_ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#curacao -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#curacao">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fruit_liquour"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#curry_leaf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#curry_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
     </owl:Class>
     
 
@@ -395,17 +521,17 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#darkRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#dark_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#darkRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#dark_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#demeraraRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#demerara_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#demeraraRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#demerara_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
@@ -415,6 +541,22 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#diet_coke">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#soft_drinks"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#double_rocks_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#double_rocks_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#edible_flower -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#edible_flower">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
     </owl:Class>
     
 
@@ -455,6 +597,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fernet_branca_menta">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fernet"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#flute -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#flute">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -500,6 +650,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#genever -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#genever">
@@ -532,6 +688,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gomme -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gomme">
@@ -548,10 +710,34 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#brandy"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_coin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_coin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_discard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_discard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
     </owl:Class>
     
 
@@ -564,10 +750,34 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_twist -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_twist">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_wedge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_wedge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_zest -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_zest">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapefruit_garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grappa -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grappa">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy"/>
     </owl:Class>
     
 
@@ -596,9 +806,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#highlandScotch -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#highlands_scotch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#highlandScotch">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#highlands_scotch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#scotch"/>
     </owl:Class>
     
@@ -612,23 +822,55 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#hurricane_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#hurricane_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#serve"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice_block -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice_block">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice_spear -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice_spear">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ingredient -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ingredient"/>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#irishWhiskey -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#irish_whiskey -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#irishWhiskey">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#irish_whiskey">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#islayScotch -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#islay_scotch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#islayScotch">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#islay_scotch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#scotch"/>
     </owl:Class>
     
@@ -642,10 +884,50 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#japaneseWhiskey -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#japanese_whiskey -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#japaneseWhiskey">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#japanese_whiskey">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#julep_tin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#julep_tin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_coin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_coin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_discard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_discard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
     </owl:Class>
     
 
@@ -658,6 +940,38 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_twist -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_twist">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_wedge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_wedge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_wheel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_wheel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_zest -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_zest">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemon_garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemonade -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lemonade">
@@ -666,9 +980,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lightRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#light_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lightRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#light_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
@@ -682,6 +996,70 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_coin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_coin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_discard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_discard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_leaf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_twist -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_twist">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_wedge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_wedge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_wheel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_wheel">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_zest -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_zest">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lime_garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#liquour -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#liquour">
@@ -691,17 +1069,17 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#londonDryGin -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#london_dry_gin -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#londonDryGin">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#london_dry_gin">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gin"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lowlandScotch -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lowlands_scotch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lowlandScotch">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#lowlands_scotch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#scotch"/>
     </owl:Class>
     
@@ -711,6 +1089,22 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#luxardo_maraschino">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fruit_liquour"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#maraschino_cherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#maraschino_cherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cherry_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#martini_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#martini_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -731,10 +1125,67 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_leaf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_sprig -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_sprig">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mint_garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#misc_na_ingredient -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#misc_na_ingredient">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#nonalcoholic_ingredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mug -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#mug">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#neat -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#neat">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#no_ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#nick_and_nora -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#nick_and_nora">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#no_ice -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#no_ice">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#serve"/>
     </owl:Class>
     
 
@@ -755,10 +1206,42 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#oldTomGin -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#old_tom_gin -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#oldTomGin">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#old_tom_gin">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gin"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#on_the_rocks -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#on_the_rocks">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_coin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_coin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_discard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_discard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
     </owl:Class>
     
 
@@ -771,6 +1254,38 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_twist -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_twist">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_wedge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_wedge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_zest -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_zest">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orange_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orchid -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orchid">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#edible_flower"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orgeat -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orgeat">
@@ -779,10 +1294,18 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#overproofRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#overproof_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#overproofRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#overproof_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pandan_leaf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pandan_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
     </owl:Class>
     
 
@@ -811,6 +1334,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_frond -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_frond">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_garnish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_garnish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnish"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_juice -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_juice">
@@ -819,10 +1358,35 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_leaf -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_leaf">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#leaf_garnish"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_wedge -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_wedge">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pineapple_garnish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pint_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pint_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pisco -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#pisco">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grapeBrandy"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#grape_brandy"/>
     </owl:Class>
     
 
@@ -835,18 +1399,32 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rhumAgricole -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rhumAgricole">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rhum_agricole -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rhum_agricole">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spirit"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rocks_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rocks_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -854,7 +1432,7 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit"/>
     </owl:Class>
     
 
@@ -862,7 +1440,15 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rye -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rye">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#americanWhiskey"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#american_whiskey"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#schooner -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#schooner">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -875,18 +1461,40 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shochu -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#serve -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shochu">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#serve"/>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shake -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shake">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#simpleSyrup -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shochu -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#simpleSyrup">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#shochu">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#simple_syrup -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#simple_syrup">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sweetener"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#snifter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#snifter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -907,9 +1515,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spicedRum -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spiced_rum -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spicedRum">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spiced_rum">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rum"/>
     </owl:Class>
     
@@ -923,9 +1531,25 @@
     
 
 
-    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit -->
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#stir -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit">
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#stir">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#preperation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#straight_up -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#straight_up">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#no_ice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#spirit"/>
     </owl:Class>
     
@@ -943,6 +1567,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sweetener">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#nonalcoholic_ingredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#tankard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#tankard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
     </owl:Class>
     
 
@@ -967,6 +1599,22 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#triple_sec">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#fruit_liquour"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#tumbler -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#tumbler">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#up -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#up">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#no_ice"/>
     </owl:Class>
     
 
@@ -1049,6 +1697,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#wine_glass -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#wine_glass">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#glassware"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#yellow_chartreuse -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#yellow_chartreuse">
@@ -1070,8 +1726,8 @@
         <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#brandy"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gin"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#vodka"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey"/>
         </owl:members>
@@ -1080,8 +1736,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#gin"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#riceSpirit"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugarSpirit"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#rice_spirit"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sugar_spirit"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#vodka"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey"/>
         </owl:members>

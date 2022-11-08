@@ -52,3 +52,11 @@ need to add edge case: if no ingredient found, give alert!
 add this ingredient to temp file that shows the error, let you add what is necessary, 
 and then try again!
 """
+
+"""
+way to approach:
+build scraping program that finds everything not in a class
+this will give an idea of how information is formatted
+order by number of occurrences
+put in those most common first
+"""
