@@ -1,0 +1,5 @@
+bibliography
+https://selenium-python.readthedocs.io/
+https://punchdrink.com/recipe-archives/
+https://neo4j.com/blog/ontologies-in-neo4j-semantics-and-knowledge-graphs/
+https://graphacademy.neo4j.com/courses/app-python/
