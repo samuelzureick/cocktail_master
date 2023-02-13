@@ -30,6 +30,12 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#containsMajorAllergen -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#containsMajorAllergen"/>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnishedWith -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#garnishedWith">
@@ -67,7 +73,6 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#isIngedientOf -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#isIngedientOf">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#ingredient"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cocktail"/>
     </owl:ObjectProperty>
@@ -598,6 +603,7 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#dairy_product">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#allergen_ingredient"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#dairy"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#misc_na_ingredient"/>
     </owl:Class>
     
@@ -607,6 +613,12 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#daquiri">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#cocktail"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orgeat"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whiskey_sour"/>
     </owl:Class>
     
@@ -664,7 +676,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#egg_white">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#allergen_ingredient"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#eggs"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#misc_na_ingredient"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#containsMajorAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#eggs"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1429,7 +1448,14 @@
     <!-- http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orgeat -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#orgeat">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#allergen_ingredient"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#sweetener"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#containsMajorAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#tree_nuts"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1923,7 +1949,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#whole_egg">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#allergen_ingredient"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#eggs"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#misc_na_ingredient"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#containsMajorAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2022/9/cocktail_master#eggs"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
