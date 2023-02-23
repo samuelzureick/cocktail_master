@@ -3,17 +3,11 @@ from selenium.webdriver.common.by import By
 from Cocktail import Cocktail
 from fraction import Fraction
 import difflib
+import time
 
 with open("classes.txt") as f:
 	classes = [c.replace("\n", "") for c in f.readlines()]
 driver = webdriver.Chrome()
-
-#driver.get("https://punchdrink.com/recipe-archive")
-#items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
-#for item in items:
-#	item.click()
-driver.get("https://punchdrink.com/recipes/86-long-island-iced-tea/")
-
 def scrape():
 	name = driver.find_element(By.CLASS_NAME, "entry-title.text-center")
 	print(name.text)
@@ -36,6 +30,23 @@ def scrape():
 	cocktails = []
 	cocktails.append(Cocktail(name.text,ingredients, preperation.text))
 
+
+driver.get("https://punchdrink.com/recipe-archives/")
+time.sleep(1)
+items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
+main_window = driver.current_window_handle
+
+for item in items:
+	item.click()
+for child in driver.window_handles:
+	if child != main_window:
+		driver.switch_to.window(child)
+		time.sleep(1)
+		scrape()
+		driver.close()
+#driver.get("https://punchdrink.com/recipes/86-long-island-iced-tea/")
+
+
 #p = driver.current_window_handle
 #children = driver.window_handles
 #for child in children:
@@ -44,7 +55,7 @@ def scrape():
 #		scrape()
 
 #driver.switch_to.window(p)
-scrape()
+#scrape()
 
 
 """
