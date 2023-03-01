@@ -56,17 +56,36 @@ def get_classes():
 
 
 def log(cock):
+	owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
+	onto_path.append(".")
+	onto = get_ontology("cocktailRefact.owl")
+	onto.load()
+	with onto:
+		sync_reasoner_pellet()
+
 	for c in cock:
-		owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
-		onto_path.append(".")
-		onto = get_ontology("cocktailRefact.owl")
-		onto.load()
-		with onto:
-			sync_reasoner_pellet()
 		cocktail_name = string.capwords(c.getName()).replace(" ", "")
 		ingredients = c.getIngredients()
 		with onto:
-			temp = types.new_class(cocktail_name, (Cocktail,))
+			temp = types.new_class(cocktail_name, (onto.Cocktail,))
+			for ing in ingredients:
+				closest_val = difflib.get_close_matches(ing, list(cocktail_dictionary.keys()))
+				alt = None
+				for potential_ing in list(cocktail_dictionary.keys()):
+					if potential_ing in ing.lower():
+						alt = potential_ing
+						break
+				if closest_val == [] and alt != None:
+					match = alt
+					print(match)
+				elif closest_val == [] and alt == None:
+					print("COULD NOT FIND MATCH")
+				else:
+					match = closest_val[0]
+					print(match)
+				#temp.contains(cocktail_dictionary[difflib.get_close_matches("ing", list(cocktail_dictionary.keys()))[0]])
+
+
 
 
 
@@ -78,15 +97,6 @@ cocktail_dictionary = get_classes()
 log(cocktails)
 
 
-p = driver.current_window_handle
-children = driver.window_handles
-for child in children:
-	if child != p:
-		driver.switch_to.window(child)
-		scrape()
-
-driver.switch_to.window(p)
-scrape()
 
 
 """
