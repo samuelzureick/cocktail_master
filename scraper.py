@@ -4,31 +4,25 @@ from Cocktail import Cocktail
 from fraction import Fraction
 import difflib
 import time
+from owlready2 import *
+import owlready2
+from ast import literal_eval
+import re
+import types
+import string
 
 with open("classes.txt") as f:
 	classes = [c.replace("\n", "") for c in f.readlines()]
 driver = webdriver.Chrome()
+cocktails = []
 def scrape():
 	name = driver.find_element(By.CLASS_NAME, "entry-title.text-center")
 	print(name.text)
 	ingredients = driver.find_element(By.CLASS_NAME, "ingredients-list").text.splitlines()
-	print(ingredients)
-	for i in range(len(ingredients)):
-		loc = ingredients[i].find("ounce")
-		if loc != -1:
-			ingredients[i] = ingredients[i][loc+len("ounce"):]
-		loc = ingredients[i].find("(")
-		if loc != -1:
-			ingredients[i] = ingredients[i][:loc]
-	for ing in ingredients:
-		try:
-			print("Class found: " + difflib.get_close_matches(ing, classes)[0]) 
-		except:
-			print("no matching class found!")
-	preperation = driver.find_element(By.XPATH, '//*[@id="recipe-content"]/div[4]/div/div[2]/ol')
-	print(preperation.text)
-	cocktails = []
-	cocktails.append(Cocktail(name.text,ingredients, preperation.text))
+	#preperation = driver.find_element(By.CLASS_NAME, 'recipeInstructions').text.splitlines()
+	#preperation = driver.find_element(By.XPATH, "//span[contains(@itemprop, 'recipeInstructions')]") 
+	preperation="temp"
+	cocktails.append(Cocktail(name.text,ingredients, preperation))
 
 
 driver.get("https://punchdrink.com/recipe-archives/")
@@ -36,26 +30,63 @@ time.sleep(1)
 items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
 main_window = driver.current_window_handle
 
-for item in items:
+for item in items[:1]:
 	item.click()
+	pass
 for child in driver.window_handles:
 	if child != main_window:
 		driver.switch_to.window(child)
 		time.sleep(1)
 		scrape()
 		driver.close()
-#driver.get("https://punchdrink.com/recipes/86-long-island-iced-tea/")
+
+def get_classes():
+	owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
+	onto_path.append(".")
+	onto = get_ontology("cocktailRefact.owl")
+	onto.load()
+	with onto:
+		sync_reasoner_pellet()
+	print(onto)
+	classes = list(onto.classes())
+	cdict = {}
+	for c in classes:
+		cdict[re.sub(r"(?<=\w)([A-Z])", r" \1",str(c)[15:]).lower()] = c
+	return cdict
 
 
-#p = driver.current_window_handle
-#children = driver.window_handles
-#for child in children:
-#	if child != p:
-#		driver.switch_to.window(child)
-#		scrape()
+def log(cock):
+	for c in cock:
+		owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
+		onto_path.append(".")
+		onto = get_ontology("cocktailRefact.owl")
+		onto.load()
+		with onto:
+			sync_reasoner_pellet()
+		cocktail_name = string.capwords(c.getName()).replace(" ", "")
+		ingredients = c.getIngredients()
+		with onto:
+			temp = types.new_class(cocktail_name, (Cocktail,))
 
-#driver.switch_to.window(p)
-#scrape()
+
+
+
+
+
+
+cocktail_dictionary = get_classes()
+log(cocktails)
+
+
+p = driver.current_window_handle
+children = driver.window_handles
+for child in children:
+	if child != p:
+		driver.switch_to.window(child)
+		scrape()
+
+driver.switch_to.window(p)
+scrape()
 
 
 """

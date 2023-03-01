@@ -144,6 +144,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AmontilladoSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AmontilladoSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AngosturaBitters -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AngosturaBitters">
@@ -194,11 +202,27 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AromatizedWine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AromatizedWine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Baijiu -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Baijiu">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RiceSpirit"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Schochu"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Banana -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Banana">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeFruit"/>
     </owl:Class>
     
 
@@ -223,6 +247,15 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Benedictine">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#HerbalLiquor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BiancoVermouth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BiancoVermouth">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WhiteVermouth"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth"/>
     </owl:Class>
     
 
@@ -333,6 +366,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CloudyLemonade -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CloudyLemonade">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mixers"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CocaCola -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CocaCola">
@@ -365,10 +406,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cola -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cola">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mixers"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CranberryJuice -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CranberryJuice">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FruitJuice"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CreamSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#CreamSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
     </owl:Class>
     
 
@@ -487,10 +544,19 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DryVermouth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DryVermouth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Egg -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Egg">
         <owl:equivalentClass rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#EggWhiteAllergen"/>
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeEgg"/>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
     </owl:Class>
     
@@ -531,6 +597,22 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FernetBrancaMenta">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Amaro"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FinoSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FinoSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FortifiedWine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FortifiedWine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient"/>
     </owl:Class>
     
 
@@ -841,6 +923,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#ManzanillaSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#ManzanillaSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Melonade -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Melonade">
@@ -901,6 +991,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OldTomGin">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Gin"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OlorossoSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OlorossoSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
     </owl:Class>
     
 
@@ -968,6 +1066,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#PedroXimenezSherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#PedroXimenezSherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Pepsi -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Pepsi">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mixers"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#PeychaudsBitters -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#PeychaudsBitters">
@@ -1000,6 +1114,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Port -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Port">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FortifiedWine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RedWine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RedWine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RhumAgricole -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RhumAgricole">
@@ -1012,6 +1142,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RiceSpirit">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Spirit"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RoseWine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RoseWine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient"/>
     </owl:Class>
     
 
@@ -1044,6 +1182,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Scotch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Whiskey"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FortifiedWine"/>
     </owl:Class>
     
 
@@ -1100,6 +1246,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Suze">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BitterLiquor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#SweetVermouth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#SweetVermouth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth"/>
     </owl:Class>
     
 
@@ -1169,6 +1323,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AromatizedWine"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka">
@@ -1227,6 +1389,46 @@
                 <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Whiskey"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WhiteVermouth -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WhiteVermouth">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vermouth"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WhiteWine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WhiteWine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeEgg -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeEgg">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MiscIngredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeFruit -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WholeFruit">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FruitIngredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#WineIngredient">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AlcoholicIngredient"/>
     </owl:Class>
     
 
