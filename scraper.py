@@ -10,11 +10,17 @@ from ast import literal_eval
 import re
 import types
 import string
+owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
+onto_path.append(".")
+onto = get_ontology("cocktailRefact.owl")
+onto.load()
+with onto:
+	sync_reasoner_pellet()
 
-with open("classes.txt") as f:
-	classes = [c.replace("\n", "") for c in f.readlines()]
+
 driver = webdriver.Chrome()
 cocktails = []
+missing = ""
 def scrape():
 	name = driver.find_element(By.CLASS_NAME, "entry-title.text-center")
 	print(name.text)
@@ -30,7 +36,7 @@ time.sleep(1)
 items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
 main_window = driver.current_window_handle
 
-for item in items[:1]:
+for item in items[:3]:
 	item.click()
 	pass
 for child in driver.window_handles:
@@ -41,13 +47,6 @@ for child in driver.window_handles:
 		driver.close()
 
 def get_classes():
-	owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
-	onto_path.append(".")
-	onto = get_ontology("cocktailRefact.owl")
-	onto.load()
-	with onto:
-		sync_reasoner_pellet()
-	print(onto)
 	classes = list(onto.classes())
 	cdict = {}
 	for c in classes:
@@ -56,18 +55,15 @@ def get_classes():
 
 
 def log(cock):
-	owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
-	onto_path.append(".")
-	onto = get_ontology("cocktailRefact.owl")
-	onto.load()
-	with onto:
-		sync_reasoner_pellet()
+	onto.contains.python_name = "Contains"
+	missing = ""
 
 	for c in cock:
 		cocktail_name = string.capwords(c.getName()).replace(" ", "")
 		ingredients = c.getIngredients()
 		with onto:
-			temp = types.new_class(cocktail_name, (onto.Cocktail,))
+			mf = False
+			found_ing = []
 			for ing in ingredients:
 				closest_val = difflib.get_close_matches(ing, list(cocktail_dictionary.keys()))
 				alt = None
@@ -75,15 +71,22 @@ def log(cock):
 					if potential_ing in ing.lower():
 						alt = potential_ing
 						break
-				if closest_val == [] and alt != None:
-					match = alt
+				if closest_val != [] and alt == None:
+					found_ing.append(closest_val[0])
 					print(match)
 				elif closest_val == [] and alt == None:
 					print("COULD NOT FIND MATCH")
+					mf = True
+					missing += (ing+"\n")
 				else:
-					match = closest_val[0]
-					print(match)
+					found_ing.append(alt)
+			if mf == False:
+				temp = types.new_class(cocktail_name, (onto.Cocktail,))
+				for ingredient in found_ing:
+					temp.Contains.append(cocktail_dictionary[ingredient])
+
 				#temp.contains(cocktail_dictionary[difflib.get_close_matches("ing", list(cocktail_dictionary.keys()))[0]])
+	return missing
 
 
 
@@ -94,7 +97,12 @@ def log(cock):
 
 
 cocktail_dictionary = get_classes()
-log(cocktails)
+print(cocktail_dictionary)
+m = log(cocktails)
+onto.save()
+with open("unknown.txt","w") as f:
+	f.write(m)
+	
 
 
 
