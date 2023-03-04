@@ -659,6 +659,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Crustaceans -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Crustaceans">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cynar -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cynar">
@@ -835,6 +843,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#FinoSherry">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sherry"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Fish -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Fish">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
     </owl:Class>
     
 
@@ -1179,6 +1195,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Lupin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Lupin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#LuxardoMaraschino -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#LuxardoMaraschino">
@@ -1295,6 +1319,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Molluscs -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Molluscs">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MrBlack -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MrBlack">
@@ -1307,6 +1339,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mug">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Glassware"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mustard -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mustard">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
     </owl:Class>
     
 
@@ -1608,6 +1648,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sesame -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sesame">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Shaken -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Shaken">
@@ -1660,6 +1708,14 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Soda">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mixers"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Soybeans -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Soybeans">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#MajorAllergen"/>
     </owl:Class>
     
 

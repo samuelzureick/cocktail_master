@@ -23,17 +23,18 @@ print(cocktail_names)
 print(allergen_names)
 
 class mainApp(tk.Tk):
-    tk.Tk.__init__(self, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        tk.Tk.__init__(self,*args, **kwargs)
 
-    self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
+    #self.title_font = tk.font.Font(family='Helvetica', size=18, weight="bold", slant="italic")
 
     # the container is where we'll stack a bunch of frames
     # on top of each other, then the one we want visible
     # will be raised above the others
-    container = tk.Frame(self)
-    container.pack(side="top", fill="both", expand=True)
-    container.grid_rowconfigure(0, weight=1)
-    container.grid_columnconfigure(0, weight=1)
+        container = tk.Frame(self)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
     self.frames = {}
     for F in (MainPage, SearchResults, PageTwo):
@@ -149,3 +150,5 @@ class MainPage(tk.Frame):
         tree_nuts = IntVar()
         Checkbutton(allergenFrame ,text="tree nuts", variable=tree_nuts).grid(row=6, sticky=W)
         Button(allergenFrame, text="Find", command=allergenQuery).grid(row=7, sticky=W)
+
+mainApp()
