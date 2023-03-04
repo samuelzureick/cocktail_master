@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import font
 from owlready2 import *
 import owlready2
 from ast import literal_eval
@@ -15,21 +16,78 @@ graph = default_world.as_rdflib_graph()
 o = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"
 
 import tkinter as tk
-prev_pos = None
+cocktails = [
+    "Martini",
+    "Margarita",
+    "Old Fashioned",
+    "Negroni",
+    "Daiquiri",
+    "Gin and Tonic",
+    "Manhattan",
+    "Whiskey Sour",
+    "Mojito",
+    "Cosmopolitan",
+    "Bloody Mary",
+    "Pina Colada",
+    "Long Island Iced Tea",
+    "White Russian",
+    "Sidecar",
+    "Sazerac",
+    "Tom Collins",
+    "Gimlet",
+    "Tequila Sunrise",
+    "Singapore Sling",
+    "Mimosa",
+    "Kir Royale",
+    "Bellini",
+    "French 75",
+    "Corpse Reviver #2",
+    "Irish Coffee",
+    "Moscow Mule",
+    "Dark 'N' Stormy",
+    "Mai Tai",
+    "Blue Hawaii",
+    "Hurricane",
+    "Mudslide",
+    "Tequila Mockingbird",
+    "Zombie",
+    "Sex on the Beach",
+    "Grasshopper",
+    "Brandy Alexander",
+    "Pink Lady",
+    "Bee's Knees",
+    "French Connection",
+    "Blood and Sand",
+    "Rusty Nail",
+    "Lemon Drop Martini",
+    "Champagne Cocktail",
+    "Pisco Sour",
+    "Boulevardier",
+    "Golden Margarita",
+    "Black Russian",
+    "Godfather",
+    "Alabama Slammer"
+]
+
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("My App")
-        self.geometry("400x400+100+100")
+        self.geometry("600x400+100+100")
+        self.configure(bg="#C98CA7")
+        #self.configure("Modern No. 20",20,"bold")
 
+        # Set default font for all text
+        #self.option_add("*Font", default_font)
 
         # Create a frame for the search bar
         search_frame = tk.Frame(self)
         search_frame.pack(side="top", fill="x", padx=10, pady=10)
+        search_frame.configure(bg="#C98CA7")
 
         # Create a label and entry widget for the search bar
-        tk.Label(search_frame, text="Search:").pack(side="left")
+        tk.Label(search_frame, text="Find a cocktail:").pack(side="left")
         self.search_entry = tk.Entry(search_frame)
         self.search_entry.pack(side="left", expand=True, fill="x")
 
@@ -38,7 +96,8 @@ class App(tk.Tk):
 
         # Create a frame for the allergen checkboxes
         allergens_frame = tk.Frame(self)
-        allergens_frame.pack(padx=10, pady=10)
+        allergens_frame.pack(side="left", padx=10, pady=10)
+        allergens_frame.configure(bg="#C98CA7")
 
         # Create the allergen checkboxes
         self.allergens = {
@@ -56,16 +115,66 @@ class App(tk.Tk):
             "Soybeans": tk.BooleanVar(value=False),
             "Sulphites": tk.BooleanVar(value=False),
             "Tree Nuts": tk.BooleanVar(value=False),
-            
         }
         for i, allergen in enumerate(self.allergens):
-            tk.Checkbutton(allergens_frame, text=allergen, variable=self.allergens[allergen]).grid(row=i // 2,column=i % 2, sticky="w")
-    
+            tk.Checkbutton(allergens_frame, bg="#C98CA7", text=allergen, variable=self.allergens[allergen]).grid(
+                row=i // 2, column=i % 2, sticky="w"
+            )
+
         # Create a button to initiate the allergen search
-        tk.Button(self, text="Search Allergens", command=self.allergen_search).pack(pady=10)
+        tk.Button(self, text="Search Allergens", command=self.allergen_search).pack(side="left", pady=10)
 
         # Create a button to switch to the advanced query section
-        tk.Button(self, text="Advanced Query", command=self.advanced_query).pack(pady=10)
+        tk.Button(self, text="Advanced Query", command=self.advanced_query).pack(side="left", pady=10)
+
+        # Create a frame for the cocktail listbox and filter box
+        cocktail_frame = tk.Frame(self)
+        cocktail_frame.pack(side="right", fill="both", padx=10, pady=10)
+        cocktail_frame.configure(bg="#C98CA7")
+
+        # Create a filter box and add it to the cocktail frame
+        filter_frame = tk.Frame(cocktail_frame)
+        filter_frame.pack(side="top", fill="x", padx=10, pady=10)
+        filter_frame.configure(bg="#C98CA7")
+
+        
+        # Create a listbox for displaying the cocktails
+        self.cocktail_listbox = tk.Listbox(cocktail_frame, selectmode=tk.SINGLE, width=50)
+
+        # Create a scrollbar for the cocktail listbox
+        scrollbar = tk.Scrollbar(cocktail_frame)
+        scrollbar.pack(side="right", fill="y")
+        self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#C98CA7")
+        scrollbar.config(command=self.cocktail_listbox.yview)
+        self.cocktail_listbox.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+
+
+        # Load data into the listbox
+        self.load_cocktails()
+        # Create a filter label and entry widget for the listbox
+        tk.Label(filter_frame, text="Filter Cocktails:").pack(side="left")
+        self.filter_entry = tk.Entry(filter_frame)
+        self.filter_entry.pack(side="left", expand=True, fill="x")
+        self.filter_entry.bind("<KeyRelease>", self.filter_cocktails)
+
+    def load_cocktails(self):
+        # Add cocktails to the listbox
+        for cocktail in cocktails:
+            self.cocktail_listbox.insert(tk.END, cocktail)
+
+    def filter_cocktails(self, event):
+        # Clear the listbox
+        self.cocktail_listbox.delete(0, tk.END)
+
+        # Filter the cocktails based on the filter text
+        filter_text = self.filter_entry.get().lower()
+        for cocktail in cocktails:
+            if filter_text in cocktail.lower():
+                self.cocktail_listbox.insert(tk.END, cocktail)
+        
+
+
+
 
     def search(self):
         query = self.search_entry.get()

@@ -36,7 +36,7 @@ time.sleep(1)
 items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
 main_window = driver.current_window_handle
 
-for item in items[:3]:
+for item in items:
 	item.click()
 	pass
 for child in driver.window_handles:
