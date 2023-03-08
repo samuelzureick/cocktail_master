@@ -23,12 +23,12 @@ cocktails = []
 missing = ""
 def scrape():
 	name = driver.find_element(By.CLASS_NAME, "entry-title.text-center")
-	print(name.text)
-	ingredients = driver.find_element(By.CLASS_NAME, "ingredients-list").text.splitlines()
+	ingredients = driver.find_element(By.CLASS_NAME, "ingredients-list").text
+	garnish = driver.find_element(By.CLASS_NAME, "garn-glass").text
+	#directions = driver.find_element(By.CLASS_NAME, "recipeInstructions").text.splitlines()
 	#preperation = driver.find_element(By.CLASS_NAME, 'recipeInstructions').text.splitlines()
-	#preperation = driver.find_element(By.XPATH, "//span[contains(@itemprop, 'recipeInstructions')]") 
-	preperation="temp"
-	cocktails.append(Cocktail(name.text,ingredients, preperation))
+	directions = driver.find_element(By.XPATH, "//ol [@itemprop='recipeInstructions']").text
+	cocktails.append(Cocktail(name.text,ingredients, directions, garnish))
 
 
 driver.get("https://punchdrink.com/recipe-archives/")
@@ -36,7 +36,7 @@ time.sleep(1)
 items = driver.find_elements(By.CLASS_NAME,'recipe-tease__title')
 main_window = driver.current_window_handle
 
-for item in items:
+for item in items[:4]:
 	item.click()
 	pass
 for child in driver.window_handles:
@@ -60,7 +60,7 @@ def log(cock):
 
 	for c in cock:
 		cocktail_name = string.capwords(c.getName()).replace(" ", "")
-		ingredients = c.getIngredients()
+		ingredients = c.getIngredients().splitlines()
 		with onto:
 			mf = False
 			found_ing = []
@@ -84,6 +84,13 @@ def log(cock):
 				temp = types.new_class(cocktail_name, (onto.Cocktail,))
 				for ingredient in found_ing:
 					temp.Contains.append(cocktail_dictionary[ingredient])
+				print(type(c.getIngredients()))
+				print(type(c.getPreperation()))
+				print(type(c.getGarnish()))
+				others = [c.getIngredients(), c.getPreperation(), c.getGarnish()]
+				temp.comment = others
+				#temp.comment.append(c.getPreperation())
+				#temp.comment.append(c.getGarnish())
 
 				#temp.contains(cocktail_dictionary[difflib.get_close_matches("ing", list(cocktail_dictionary.keys()))[0]])
 	return missing
@@ -100,8 +107,8 @@ cocktail_dictionary = get_classes()
 print(cocktail_dictionary)
 m = log(cocktails)
 onto.save()
-with open("unknown.txt","w") as f:
-	f.write(m)
+#with open("unknown.txt","w") as f:
+#	f.write(m)
 	
 
 

@@ -37,6 +37,18 @@
 
 <owl:AnnotationProperty rdf:about="http://www.lesfleursdunormal.fr/static/_downloads/owlready_ontology.owl#python_name"/>
 
+<owl:AnnotationProperty rdf:about="#garnish">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+</owl:AnnotationProperty>
+
+<owl:AnnotationProperty rdf:about="#ingredients">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+</owl:AnnotationProperty>
+
+<owl:AnnotationProperty rdf:about="#preperation">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+</owl:AnnotationProperty>
+
 <owl:Class rdf:about="#Cocktail">
   <owl:disjointWith rdf:resource="#Ingredient"/>
 </owl:Class>
@@ -59,6 +71,15 @@
   <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
 </owl:Class>
 
+<owl:Class rdf:about="#AlcoholicIngredient">
+  <rdfs:subClassOf rdf:resource="#Ingredient"/>
+  <owl:disjointWith rdf:resource="#NaIngredient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NaIngredient">
+  <rdfs:subClassOf rdf:resource="#Ingredient"/>
+</owl:Class>
+
 <owl:Class rdf:about="#AgaveNectar">
   <rdfs:subClassOf rdf:resource="#Sweetener"/>
 </owl:Class>
@@ -67,21 +88,12 @@
   <rdfs:subClassOf rdf:resource="#NaIngredient"/>
 </owl:Class>
 
-<owl:Class rdf:about="#NaIngredient">
-  <rdfs:subClassOf rdf:resource="#Ingredient"/>
-</owl:Class>
-
 <owl:Class rdf:about="#AgaveSpirit">
   <rdfs:subClassOf rdf:resource="#Spirit"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Spirit">
   <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
-</owl:Class>
-
-<owl:Class rdf:about="#AlcoholicIngredient">
-  <rdfs:subClassOf rdf:resource="#Ingredient"/>
-  <owl:disjointWith rdf:resource="#NaIngredient"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Allergen">
@@ -138,6 +150,10 @@
 
 <owl:Class rdf:about="#FortifiedWine">
   <rdfs:subClassOf rdf:resource="#WineIngredient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WineIngredient">
+  <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
 </owl:Class>
 
 <owl:Class rdf:about="#AnejoTequila">
@@ -201,10 +217,6 @@
 
 <owl:Class rdf:about="#AromatizedWine">
   <rdfs:subClassOf rdf:resource="#WineIngredient"/>
-</owl:Class>
-
-<owl:Class rdf:about="#WineIngredient">
-  <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Baijiu">
@@ -467,6 +479,13 @@
       <owl:someValuesFrom rdf:resource="#LimeJuice"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:comment>60 ml Rum
+25 ml lime juice
+12.5ml gomme</rdfs:comment>
+  <rdfs:comment>add all ingredients to cocktail tins
+give short and hard shake
+double strain into nick and nora</rdfs:comment>
+  <rdfs:comment>no garnish</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Gomme">
@@ -1071,133 +1090,22 @@
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
       <owl:someValuesFrom rdf:resource="#Tea"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-</owl:Class>
-
-<owl:Class rdf:about="#DirtyOldMan">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Tequila"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Mezcal"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Aperol"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#AppleJuice"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#AgaveNectar"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Bitters"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-</owl:Class>
-
-<owl:Class rdf:about="#SilverService50/50Martini">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Gin"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Vermouth"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Absinthe"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Bitters"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-</owl:Class>
-
-<owl:Class rdf:about="#JapaneseSlipper">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Cointreau"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Midori"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-</owl:Class>
-
-<owl:Class rdf:about="#OneSipMartini">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Vodka"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Vermouth"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#contains"/>
-      <owl:someValuesFrom rdf:resource="#Sherry"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/4 ounces Bombay Sapphire Gin
+2 3/4 ounces Lennon’s Evening Tea (see Editor’s Note)
+1/4 ounce cacao simple syrup (see Editor’s Note)</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine gin, hot Lennon’s Evening Tea and cacao simple syrup in a 6-ounce Irish Coffee glass.
+Shake heavy cream gently in a shaker for 6 to 7 seconds, then pour on top.
+Spray lemon herb hydrosol on the side of the glass.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: 3/4 ounce heavy cream, lemon herb hydrosol (see Editor’s Note)</rdfs:comment>
 </owl:Class>
 
 <owl:Thing rdf:about="#agaveNectar">
@@ -1623,179 +1531,61 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </owl:Thing>
 
-<rdf:Description rdf:about="#JohnsBlend">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
-</rdf:Description>
-
-<rdf:Description rdf:about="#John?sBlend">
-  <rdfs:subClassOf rdf:resource="#Cocktail"/>
-</rdf:Description>
-
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AgaveNectar"/>
-    <rdf:Description rdf:about="#Gomme"/>
-    <rdf:Description rdf:about="#Grenadine"/>
-    <rdf:Description rdf:about="#Honey"/>
-    <rdf:Description rdf:about="#Orgeat"/>
-    <rdf:Description rdf:about="#PassionfruitSyrup"/>
-    <rdf:Description rdf:about="#SimpleSyrup"/>
+    <rdf:Description rdf:about="#Kahlua"/>
+    <rdf:Description rdf:about="#MrBlack"/>
+    <rdf:Description rdf:about="#PatronXO"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Amaretto"/>
-    <rdf:Description rdf:about="#CremeDeNoyaux"/>
-    <rdf:Description rdf:about="#Frangelico"/>
+    <rdf:Description rdf:about="#HardShake"/>
+    <rdf:Description rdf:about="#LongShake"/>
+    <rdf:Description rdf:about="#ShortShake"/>
+    <rdf:Description rdf:about="#WhipShake"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AmaroAverna"/>
-    <rdf:Description rdf:about="#AmaroMontenegro"/>
-    <rdf:Description rdf:about="#AmaroNonino"/>
-    <rdf:Description rdf:about="#Fernet"/>
-    <rdf:Description rdf:about="#FernetBrancaMenta"/>
-    <rdf:Description rdf:about="#Jagermeister"/>
+    <rdf:Description rdf:about="#Genever"/>
+    <rdf:Description rdf:about="#LondonDryGin"/>
+    <rdf:Description rdf:about="#OldTomGin"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AmericanWhiskey"/>
-    <rdf:Description rdf:about="#IrishWhiskey"/>
-    <rdf:Description rdf:about="#JapaneseWhiskey"/>
-    <rdf:Description rdf:about="#Scotch"/>
+    <rdf:Description rdf:about="#FruitIngredient"/>
+    <rdf:Description rdf:about="#MiscIngredient"/>
+    <rdf:Description rdf:about="#Mixers"/>
+    <rdf:Description rdf:about="#Sweetener"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AngosturaBitters"/>
-    <rdf:Description rdf:about="#OrangeBitters"/>
-    <rdf:Description rdf:about="#PeychaudsBitters"/>
+    <rdf:Description rdf:about="#Celery"/>
+    <rdf:Description rdf:about="#Dairy"/>
+    <rdf:Description rdf:about="#Egg"/>
+    <rdf:Description rdf:about="#Gluten"/>
+    <rdf:Description rdf:about="#Peanuts"/>
+    <rdf:Description rdf:about="#Sulphites"/>
+    <rdf:Description rdf:about="#TreeNuts"/>
+    <rdf:Description rdf:about="#Wheat"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AppleJuice"/>
-    <rdf:Description rdf:about="#CranberryJuice"/>
-    <rdf:Description rdf:about="#GrapefruitJuice"/>
-    <rdf:Description rdf:about="#LemonJuice"/>
-    <rdf:Description rdf:about="#LimeJuice"/>
-    <rdf:Description rdf:about="#OrangeJuice"/>
-    <rdf:Description rdf:about="#PineappleJuice"/>
-    <rdf:Description rdf:about="#PomegraniteJuice"/>
-    <rdf:Description rdf:about="#TomatoJuice"/>
-    <rdf:Description rdf:about="#Verjus"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Armagnac"/>
-    <rdf:Description rdf:about="#Cognac"/>
-    <rdf:Description rdf:about="#Grappa"/>
-    <rdf:Description rdf:about="#Pisco"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BananeDeBrazil"/>
-    <rdf:Description rdf:about="#Chambord"/>
-    <rdf:Description rdf:about="#CherryHeering"/>
-    <rdf:Description rdf:about="#Cointreau"/>
-    <rdf:Description rdf:about="#CremeDeCacao"/>
-    <rdf:Description rdf:about="#CremeDeCassis"/>
-    <rdf:Description rdf:about="#CremeDeMenthe"/>
-    <rdf:Description rdf:about="#CremeDeMure"/>
-    <rdf:Description rdf:about="#CremeDeViolette"/>
-    <rdf:Description rdf:about="#GrandMarnier"/>
-    <rdf:Description rdf:about="#LuxardoMaraschino"/>
-    <rdf:Description rdf:about="#Melonade"/>
-    <rdf:Description rdf:about="#Midori"/>
-    <rdf:Description rdf:about="#Passoa"/>
-    <rdf:Description rdf:about="#TripleSec"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BataviaArrack"/>
-    <rdf:Description rdf:about="#Cachaca"/>
-    <rdf:Description rdf:about="#Rum"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Benedictine"/>
-    <rdf:Description rdf:about="#VelvetFalernum"/>
-    <rdf:Description rdf:about="#YellowChartreuse"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BitterLiquor"/>
-    <rdf:Description rdf:about="#FruitLiquor"/>
-    <rdf:Description rdf:about="#HerbalLiquor"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackCoffee"/>
-    <rdf:Description rdf:about="#ColdBrew"/>
-    <rdf:Description rdf:about="#Espresso"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackStrapRum"/>
-    <rdf:Description rdf:about="#DarkRum"/>
-    <rdf:Description rdf:about="#DemeraraRum"/>
-    <rdf:Description rdf:about="#LightRum"/>
-    <rdf:Description rdf:about="#OverproofRum"/>
-    <rdf:Description rdf:about="#RhumAgricole"/>
-    <rdf:Description rdf:about="#SpicedRum"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackTea"/>
-    <rdf:Description rdf:about="#BreakfastTea"/>
-    <rdf:Description rdf:about="#ChamomileTea"/>
-    <rdf:Description rdf:about="#EarlGreyTea"/>
-    <rdf:Description rdf:about="#GreenTea"/>
-    <rdf:Description rdf:about="#IcedTea"/>
-    <rdf:Description rdf:about="#JasmineTea"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Blended"/>
-    <rdf:Description rdf:about="#Built"/>
-    <rdf:Description rdf:about="#Poured"/>
-    <rdf:Description rdf:about="#Shaken"/>
-    <rdf:Description rdf:about="#Stirred"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlendedScotch"/>
-    <rdf:Description rdf:about="#CambletownScotch"/>
-    <rdf:Description rdf:about="#HighlandsScotch"/>
-    <rdf:Description rdf:about="#IslayScotch"/>
-    <rdf:Description rdf:about="#LowlandsScotch"/>
+    <rdf:Description rdf:about="#Brandy"/>
+    <rdf:Description rdf:about="#Gin"/>
+    <rdf:Description rdf:about="#RiceSpirit"/>
+    <rdf:Description rdf:about="#SugarSpirit"/>
+    <rdf:Description rdf:about="#Vodka"/>
+    <rdf:Description rdf:about="#Whiskey"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
@@ -1822,59 +1612,169 @@
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Brandy"/>
-    <rdf:Description rdf:about="#Gin"/>
-    <rdf:Description rdf:about="#RiceSpirit"/>
-    <rdf:Description rdf:about="#SugarSpirit"/>
-    <rdf:Description rdf:about="#Vodka"/>
-    <rdf:Description rdf:about="#Whiskey"/>
+    <rdf:Description rdf:about="#BlendedScotch"/>
+    <rdf:Description rdf:about="#CambletownScotch"/>
+    <rdf:Description rdf:about="#HighlandsScotch"/>
+    <rdf:Description rdf:about="#IslayScotch"/>
+    <rdf:Description rdf:about="#LowlandsScotch"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Celery"/>
-    <rdf:Description rdf:about="#Dairy"/>
-    <rdf:Description rdf:about="#Egg"/>
-    <rdf:Description rdf:about="#Gluten"/>
-    <rdf:Description rdf:about="#Peanuts"/>
-    <rdf:Description rdf:about="#Sulphites"/>
-    <rdf:Description rdf:about="#TreeNuts"/>
-    <rdf:Description rdf:about="#Wheat"/>
+    <rdf:Description rdf:about="#Blended"/>
+    <rdf:Description rdf:about="#Built"/>
+    <rdf:Description rdf:about="#Poured"/>
+    <rdf:Description rdf:about="#Shaken"/>
+    <rdf:Description rdf:about="#Stirred"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#FruitIngredient"/>
-    <rdf:Description rdf:about="#MiscIngredient"/>
-    <rdf:Description rdf:about="#Mixers"/>
-    <rdf:Description rdf:about="#Sweetener"/>
+    <rdf:Description rdf:about="#BlackTea"/>
+    <rdf:Description rdf:about="#BreakfastTea"/>
+    <rdf:Description rdf:about="#ChamomileTea"/>
+    <rdf:Description rdf:about="#EarlGreyTea"/>
+    <rdf:Description rdf:about="#GreenTea"/>
+    <rdf:Description rdf:about="#IcedTea"/>
+    <rdf:Description rdf:about="#JasmineTea"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Genever"/>
-    <rdf:Description rdf:about="#LondonDryGin"/>
-    <rdf:Description rdf:about="#OldTomGin"/>
+    <rdf:Description rdf:about="#BlackStrapRum"/>
+    <rdf:Description rdf:about="#DarkRum"/>
+    <rdf:Description rdf:about="#DemeraraRum"/>
+    <rdf:Description rdf:about="#LightRum"/>
+    <rdf:Description rdf:about="#OverproofRum"/>
+    <rdf:Description rdf:about="#RhumAgricole"/>
+    <rdf:Description rdf:about="#SpicedRum"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#HardShake"/>
-    <rdf:Description rdf:about="#LongShake"/>
-    <rdf:Description rdf:about="#ShortShake"/>
-    <rdf:Description rdf:about="#WhipShake"/>
+    <rdf:Description rdf:about="#BlackCoffee"/>
+    <rdf:Description rdf:about="#ColdBrew"/>
+    <rdf:Description rdf:about="#Espresso"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Kahlua"/>
-    <rdf:Description rdf:about="#MrBlack"/>
-    <rdf:Description rdf:about="#PatronXO"/>
+    <rdf:Description rdf:about="#BitterLiquor"/>
+    <rdf:Description rdf:about="#FruitLiquor"/>
+    <rdf:Description rdf:about="#HerbalLiquor"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Benedictine"/>
+    <rdf:Description rdf:about="#VelvetFalernum"/>
+    <rdf:Description rdf:about="#YellowChartreuse"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BataviaArrack"/>
+    <rdf:Description rdf:about="#Cachaca"/>
+    <rdf:Description rdf:about="#Rum"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BananeDeBrazil"/>
+    <rdf:Description rdf:about="#Chambord"/>
+    <rdf:Description rdf:about="#CherryHeering"/>
+    <rdf:Description rdf:about="#Cointreau"/>
+    <rdf:Description rdf:about="#CremeDeCacao"/>
+    <rdf:Description rdf:about="#CremeDeCassis"/>
+    <rdf:Description rdf:about="#CremeDeMenthe"/>
+    <rdf:Description rdf:about="#CremeDeMure"/>
+    <rdf:Description rdf:about="#CremeDeViolette"/>
+    <rdf:Description rdf:about="#GrandMarnier"/>
+    <rdf:Description rdf:about="#LuxardoMaraschino"/>
+    <rdf:Description rdf:about="#Melonade"/>
+    <rdf:Description rdf:about="#Midori"/>
+    <rdf:Description rdf:about="#Passoa"/>
+    <rdf:Description rdf:about="#TripleSec"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Armagnac"/>
+    <rdf:Description rdf:about="#Cognac"/>
+    <rdf:Description rdf:about="#Grappa"/>
+    <rdf:Description rdf:about="#Pisco"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AppleJuice"/>
+    <rdf:Description rdf:about="#CranberryJuice"/>
+    <rdf:Description rdf:about="#GrapefruitJuice"/>
+    <rdf:Description rdf:about="#LemonJuice"/>
+    <rdf:Description rdf:about="#LimeJuice"/>
+    <rdf:Description rdf:about="#OrangeJuice"/>
+    <rdf:Description rdf:about="#PineappleJuice"/>
+    <rdf:Description rdf:about="#PomegraniteJuice"/>
+    <rdf:Description rdf:about="#TomatoJuice"/>
+    <rdf:Description rdf:about="#Verjus"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AngosturaBitters"/>
+    <rdf:Description rdf:about="#OrangeBitters"/>
+    <rdf:Description rdf:about="#PeychaudsBitters"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AmericanWhiskey"/>
+    <rdf:Description rdf:about="#IrishWhiskey"/>
+    <rdf:Description rdf:about="#JapaneseWhiskey"/>
+    <rdf:Description rdf:about="#Scotch"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AmaroAverna"/>
+    <rdf:Description rdf:about="#AmaroMontenegro"/>
+    <rdf:Description rdf:about="#AmaroNonino"/>
+    <rdf:Description rdf:about="#Fernet"/>
+    <rdf:Description rdf:about="#FernetBrancaMenta"/>
+    <rdf:Description rdf:about="#Jagermeister"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Amaretto"/>
+    <rdf:Description rdf:about="#CremeDeNoyaux"/>
+    <rdf:Description rdf:about="#Frangelico"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AgaveNectar"/>
+    <rdf:Description rdf:about="#Gomme"/>
+    <rdf:Description rdf:about="#Grenadine"/>
+    <rdf:Description rdf:about="#Honey"/>
+    <rdf:Description rdf:about="#Orgeat"/>
+    <rdf:Description rdf:about="#PassionfruitSyrup"/>
+    <rdf:Description rdf:about="#SimpleSyrup"/>
   </owl:members>
 </owl:AllDisjointClasses>
 

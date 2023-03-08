@@ -5,6 +5,12 @@ from owlready2 import *
 import owlready2
 from ast import literal_eval
 import difflib
+import PIL
+from PIL import ImageTk, Image, ImageShow 
+print(PIL.__path__)
+ImageShow.WindowsViewer.format = "PNG"
+
+
 
 owlready2.JAVA_EXE = "C:\\Users\\szure\\Documents\\Protege-5.5.0\\jre\\bin\\java.exe"
 onto = get_ontology("cocktailRefact.owl")
@@ -14,7 +20,12 @@ onto.load()
 print("here")
 graph = default_world.as_rdflib_graph()
 o = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"
-
+cs = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    }""")) for inner in outer]
+for c in cs:
+    print(c.comment)
 import tkinter as tk
 cocktails = [
     "Martini",
@@ -73,8 +84,8 @@ cocktails = [
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("My App")
-        self.geometry("600x400+100+100")
+        self.title("Booze Muse")
+        self.geometry("600x500+100+100")
         self.configure(bg="#C98CA7")
         #self.configure("Modern No. 20",20,"bold")
 
@@ -87,12 +98,10 @@ class App(tk.Tk):
         search_frame.configure(bg="#C98CA7")
 
         # Create a label and entry widget for the search bar
-        tk.Label(search_frame, text="Find a cocktail:").pack(side="left")
-        self.search_entry = tk.Entry(search_frame)
-        self.search_entry.pack(side="left", expand=True, fill="x")
-
-        # Create a button to initiate the search
-        tk.Button(search_frame, text="Search", command=self.search).pack(side="left", padx=5)
+        titleText = ImageTk.PhotoImage(Image.open("finalb.PNG"))
+        l1 = tk.Label(search_frame, image=titleText)
+        l1.image = titleText
+        l1.pack(side="top", anchor="nw")
 
         # Create a frame for the allergen checkboxes
         allergens_frame = tk.Frame(self)
@@ -117,15 +126,15 @@ class App(tk.Tk):
             "Tree Nuts": tk.BooleanVar(value=False),
         }
         for i, allergen in enumerate(self.allergens):
-            tk.Checkbutton(allergens_frame, bg="#C98CA7", text=allergen, variable=self.allergens[allergen]).grid(
+            tk.Checkbutton(allergens_frame, bg="#C98CA7", text=allergen,font=(("Courier New Bold"), 10), variable=self.allergens[allergen], fg="#413C58").grid(
                 row=i // 2, column=i % 2, sticky="w"
             )
 
         # Create a button to initiate the allergen search
-        tk.Button(self, text="Search Allergens", command=self.allergen_search).pack(side="left", pady=10)
+        tk.Button(allergens_frame, text="Search Allergens", command=self.allergen_search, bg="#377771", fg="#413C58").grid(row=8, column=0)
 
         # Create a button to switch to the advanced query section
-        tk.Button(self, text="Advanced Query", command=self.advanced_query).pack(side="left", pady=10)
+        tk.Button(allergens_frame, text="Advanced Query", font=(("Courier New Bold"), 10), command=self.advanced_query, bg="#377771", fg="#413C58").grid(row=8, column=1)
 
         # Create a frame for the cocktail listbox and filter box
         cocktail_frame = tk.Frame(self)
@@ -152,7 +161,7 @@ class App(tk.Tk):
         # Load data into the listbox
         self.load_cocktails()
         # Create a filter label and entry widget for the listbox
-        tk.Label(filter_frame, text="Filter Cocktails:").pack(side="left")
+        tk.Label(filter_frame, text="Filter Cocktails:", font=(("Courier New Bold"), 10)).pack(side="left")
         self.filter_entry = tk.Entry(filter_frame)
         self.filter_entry.pack(side="left", expand=True, fill="x")
         self.filter_entry.bind("<KeyRelease>", self.filter_cocktails)
@@ -187,7 +196,7 @@ class App(tk.Tk):
         # Create a new toplevel window to display the selected allergens
         allergen_window = tk.Toplevel(self)
         x, y = self.winfo_x(), self.winfo_y()
-        allergen_window.geometry(f"400x400+{x}+{y}")
+        allergen_window.geometry(f"600x500+{x}+{y}")
         allergen_window.title("Selected Allergens")
 
         # Create a canvas to hold the allergen frame and scrollbar
@@ -219,7 +228,7 @@ class App(tk.Tk):
                         "Sulpher dioxide and sulphites" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sulphites>",
                         "Tree Nuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#TreeNuts>"}
         allergen_str = ", ".join(selected_allergens)
-        tk.Label(allergen_frame, text=f"Selected Allergens: {allergen_str}").pack(padx=10, pady=10)
+        tk.Label(allergen_frame, font=(("Courier New Bold"), 10), text=f"Selected Allergens: {allergen_str}", fg="#413C58").pack(padx=10, pady=10)
         acceptable = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
@@ -236,7 +245,7 @@ class App(tk.Tk):
             acceptable -= bad
         print(acceptable)
         # Add a back button to return to the main interface
-        tk.Button(allergen_frame, text="Back", command=lambda: self.back_to_main(allergen_window)).pack(pady=10)
+        tk.Button(allergen_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(allergen_window), fg="#413C58", bg="#007EA7").pack(pady=10)
 
         # Prevent interaction with the main window while the allergen window is open
         allergen_window.grab_set()
@@ -253,7 +262,7 @@ class App(tk.Tk):
         # Create a new toplevel window to display the advanced query
         advanced_window = tk.Toplevel(self)
         x, y = self.winfo_x(), self.winfo_y()
-        advanced_window.geometry(f"400x400+{x}+{y}")
+        advanced_window.geometry(f"600x500+{x}+{y}")
         advanced_window.title("Advanced Query")
 
         # Create a new frame to hold the advanced query interface
@@ -261,10 +270,10 @@ class App(tk.Tk):
         advanced_frame.pack(padx=10, pady=10)
 
         # Add a label to the advanced query frame
-        tk.Label(advanced_frame, text="Advanced Query").pack(padx=10, pady=10)
+        tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#413C58").pack(padx=10, pady=10)
 
         # Add a button to return to the main interface
-        tk.Button(advanced_frame, text="Back", command=lambda: self.back_to_main(advanced_window)).pack(pady=10)
+        tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(advanced_window), fg="#413C58", bg="#007EA7").pack(pady=10)
         advanced_window.grab_set()
 
 
@@ -272,7 +281,7 @@ class App(tk.Tk):
         # Store the position of the advanced query window before it is closed
         #prev_pos = (advanced_frame.winfo_x(), advanced_frame.winfo_y())
         x, y = f.winfo_x(), f.winfo_y()
-        self.geometry(f"400x400+{x}+{y}")
+        self.geometry(f"600x500+{x}+{y}")
         f.destroy()
         
         # Show the main window
@@ -282,4 +291,5 @@ class App(tk.Tk):
 
 
 app = App()
+app.resizable(False, False) 
 app.mainloop()
