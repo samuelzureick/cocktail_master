@@ -27,13 +27,14 @@ cocktails = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE
 cocktails = [re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower() for cock in cocktails]
 
 
-
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Booze Muse")
         self.geometry("600x500+100+100")
         self.configure(bg="#2A3439")
+        self.rowc=0
+
 
 
         # Create a frame for the search bar
@@ -79,7 +80,7 @@ class App(tk.Tk):
 
 
         # Create a button to initiate the allergen search
-        tk.Button(allergens_frame, text="Search Allergens", command=self.allergen_search, bg="#377771", fg="#E3DAC9").grid(row=8, column=0)
+        tk.Button(allergens_frame, text="Search Allergens", command=self.allergen_search, bg="#377771", fg="#E3DAC9", font=(("Courier New Bold"), 10)).grid(row=8, column=0)
 
 
         # Create a button to switch to the advanced query section
@@ -104,7 +105,7 @@ class App(tk.Tk):
         # Create a scrollbar for the cocktail listbox
         scrollbar = tk.Scrollbar(cocktail_frame)
         scrollbar.pack(side="right", fill="y")
-        self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439")
+        self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439", font=(("Courier New Bold"), 10))
         scrollbar.config(command=self.cocktail_listbox.yview)
         self.cocktail_listbox.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
@@ -220,7 +221,6 @@ class App(tk.Tk):
             preperation = cock.comment[1]
             garnish = cock.comment[2]
 
-
             tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
 
             tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439").pack(pady=10)
@@ -233,7 +233,7 @@ class App(tk.Tk):
 
 
         can.create_window((0, 100), window=tframe)
-        can.yview_moveto(50)
+        can.yview_moveto(0)
 
         # Prevent interaction with the main window while the allergen window is open
         allergen_window.grab_set()
@@ -255,17 +255,36 @@ class App(tk.Tk):
 
 
         # Create a new frame to hold the advanced query interface
-        advanced_frame = tk.Frame(advanced_window)
-        advanced_frame.pack(padx=10, pady=10)
+        advanced_frame = tk.Frame(advanced_window, bg="#2A3439", width="550", height="450")
+        advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
 
         # Add a label to the advanced query frame
-        tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#E3DAC9").pack(padx=10, pady=10)
+        tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576").pack(padx=10, pady=10)
 
 
         # Add a button to return to the main interface
         tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(advanced_window), fg="#E3DAC9", bg="#007EA7").pack(pady=10)
+
+        adv_can = tk.Canvas(advanced_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        adv_can.pack(expand=1, fill = "both")
+        subf=tk.Frame(adv_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
+
+        def add_filter():
+            contains_v = tk.IntVar()
+
+            tk.Radiobutton(subf, text="contains", variable=contains_v, value=1, font=(("Courier New Bold"), 10)).place(x=320,y=190 +(self.rowc*65), anchor="w")
+            tk.Radiobutton(subf, text="omits", variable=contains_v, value=0, font=(("Courier New Bold"), 10)).place(x=320, y=220+(self.rowc*65), anchor="w")
+
+            self.rowc += 1
+
+        add_filter()
+
+        tk.Button(adv_can, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter()).pack(pady=10)
+        adv_can.create_window((0, 100), window=subf)
+
         advanced_window.grab_set()
+        advanced_window.resizable(False, False)
 
 
     def back_to_main(self, f):
