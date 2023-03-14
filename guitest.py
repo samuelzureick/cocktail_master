@@ -41,7 +41,6 @@ class App(tk.Tk):
         self.tlist = []
 
 
-
         # Create a frame for the search bar
         search_frame = tk.Frame(self, borderwidth = 0)
         search_frame.pack(side="top", fill="x", padx=10, pady=10)
@@ -85,11 +84,14 @@ class App(tk.Tk):
 
 
         # Create a button to initiate the allergen search
-        tk.Button(allergens_frame, text="Search Allergens", command=self.allergen_search, bg="#377771", fg="#E3DAC9", font=(("Courier New Bold"), 10)).grid(row=8, column=0)
+        tk.Button(allergens_frame, text="search allergens", command=self.allergen_search, bg="#377771", fg="#E3DAC9", font=(("Courier New Bold"), 10)).grid(row=8, column=0)
 
 
         # Create a button to switch to the advanced query section
-        tk.Button(allergens_frame, text="Advanced Query", font=(("Courier New Bold"), 10), command=self.advanced_query, bg="#377771", fg="#E3DAC9").grid(row=8, column=1)
+        tk.Button(allergens_frame, text="advanced query", font=(("Courier New Bold"), 10), command=self.advanced_query, bg="#377771", fg="#E3DAC9").grid(row=8, column=1, padx=5)
+
+        # create custom menu button
+        tk.Button(self, text="menu generator", font=(("Courier New Bold"), 10), command=self.menugen, bg="#377771", fg="#E3DAC9").place(x=10, y=420)
 
 
         # Create a frame for the cocktail listbox and filter box
@@ -119,7 +121,7 @@ class App(tk.Tk):
         self.load_cocktails()
 
         # Create a filter label and entry widget for the listbox
-        tk.Label(filter_frame, text="Filter Cocktails:", font=(("Courier New Bold"), 10)).pack(side="left")
+        tk.Label(filter_frame, text="filter cocktails:", font=(("Courier New Bold"), 10)).pack(side="left")
         self.filter_entry = tk.Entry(filter_frame)
         self.filter_entry.pack(side="left", expand=True, fill="x")
         self.filter_entry.bind("<KeyRelease>", self.filter_cocktails)
@@ -140,7 +142,59 @@ class App(tk.Tk):
             if filter_text in cocktail.lower():
                 self.cocktail_listbox.insert(tk.END, cocktail)
         
+    def menugen(self):
+        # Hide the main window
+        self.withdraw()
+        self.advanced_window.withdraw()
 
+        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    }""")) for inner in outer])
+
+        for i in range(len(self.flist)):
+            print(self.ing_dict[self.tlist[i].get()])
+            results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                { 
+                    ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+self.ing_dict[self.tlist[i].get()]+""" . 
+                }""")) for inner in outer])
+            if self.flist[i].get() == "contains":
+                available = available & results
+            elif self.flist[i].get() == "omits":
+                available = available - results
+
+
+        # Create a new toplevel window to display the advanced query
+        self.q_window = tk.Toplevel(self)
+        x, y = self.winfo_x(), self.winfo_y()
+        self.q_window.geometry(f"600x500+{x}+{y}")
+        self.q_window.title("Advanced Query")
+
+
+        # Create a new frame to hold the advanced query interface
+        q_frame = tk.Frame(self.q_window, bg="#2A3439", width="550", height="450")
+        q_frame.pack(padx=10, pady=10, fill="both", expand=True)
+
+
+        # Add a label to the advanced query frame
+        ql = tk.Label(q_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ql.place(x=20, y=20)
+        # Add a button to return to the main interface
+        bb = tk.Button(q_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.advanced_query(), fg="#E3DAC9", bg="#007EA7")
+        bb.place(x=20, y=55)
+
+        
+        q_can = tk.Canvas(q_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        q_can.place(x=0,y=100)
+        subf=tk.Frame(q_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
+
+
+        q_can.create_window((300, 250), window=subf, anchor="center")
+
+        self.q_window.grab_set()
+        self.q_window.resizable(False, False)
 
     def search(self):
         query = self.search_entry.get()
@@ -274,11 +328,9 @@ class App(tk.Tk):
         self.advanced_window.geometry(f"600x500+{x}+{y}")
         self.advanced_window.title("Advanced Query")
 
-
         # Create a new frame to hold the advanced query interface
         advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450")
         advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
-
 
         # Add a label to the advanced query frame
         advl = tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
@@ -338,7 +390,6 @@ class App(tk.Tk):
             for i in ing_names:
                 ingmenu.add_radiobutton(label=i, value=i, variable=ing, command = ing.get())
 
-
             t.place(x=0,y=0+(self.rowc*65))
             ingal.place(x=120, y=0+(self.rowc*65))
             filt.place(x=240, y=0+(self.rowc*65))
@@ -347,12 +398,9 @@ class App(tk.Tk):
  
         add_filter()
 
-
         # add submit button
         sb = tk.Button(advanced_frame, text="search", font=(("Courier New Bold"),10), command=lambda: self.query_results(), fg="#E3DAC9", bg="#007EA7")
         sb.place(x=200, y=55)
-
-            
 
         addbut = tk.Button(advanced_frame, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter())
 
@@ -385,7 +433,7 @@ class App(tk.Tk):
             elif self.flist[i].get() == "omits":
                 available = available - results
 
-        print(available)
+        final = sorted([re.sub(r"(?<=\w)([A-Z])", r" \1",str(cockt)[15:]).lower() for cockt in list(available)])
 
         # Create a new toplevel window to display the advanced query
         self.q_window = tk.Toplevel(self)
