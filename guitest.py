@@ -1,13 +1,14 @@
-import tkinter as tk
-from tkinter import *
-from tkinter import font
-from tkinter import ttk
-from owlready2 import *
-import owlready2
-from ast import literal_eval
 import difflib
+import tkinter as tk
+from ast import literal_eval
+from tkinter import *
+from tkinter import font, ttk
+
+import owlready2
 import PIL
-from PIL import ImageTk, Image, ImageShow 
+from owlready2 import *
+from PIL import Image, ImageShow, ImageTk
+
 ImageShow.WindowsViewer.format = "PNG"
 
 
@@ -20,6 +21,7 @@ graph = default_world.as_rdflib_graph()
 o = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"
 
 import tkinter as tk
+
 cocktails = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
@@ -34,6 +36,9 @@ class App(tk.Tk):
         self.geometry("600x500+100+100")
         self.configure(bg="#2A3439")
         self.rowc=0
+        self.flist = []
+        self.slist = []
+        self.tlist = []
 
 
 
@@ -105,7 +110,7 @@ class App(tk.Tk):
         # Create a scrollbar for the cocktail listbox
         scrollbar = tk.Scrollbar(cocktail_frame)
         scrollbar.pack(side="right", fill="y")
-        self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439", font=(("Courier New Bold"), 10))
+        self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439", font=(("Courier New Bold"), 10),fg="#E3DAC9")
         scrollbar.config(command=self.cocktail_listbox.yview)
         self.cocktail_listbox.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
@@ -223,11 +228,11 @@ class App(tk.Tk):
 
             tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
 
-            tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439").pack(pady=10)
+            tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
-            tk.Label(tframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439").pack(pady=10)
+            tk.Label(tframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
-            tk.Label(tframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439").pack(pady=10)
+            tk.Label(tframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
             ttk.Separator(tframe, orient="horizontal").pack(fill="x",pady=10)
 
@@ -239,52 +244,178 @@ class App(tk.Tk):
         allergen_window.grab_set()
 
 
-    def getQuery(self, query):
-        # Do something with the query here
-        print(f"Query: {query}")
-
     def advanced_query(self):
         # Hide the main window
+        x, y = self.winfo_x(), self.winfo_y()
         self.withdraw()
+        try:
+            self.q_window.withdraw()
+        except:
+            pass
+        self.flist = []
+        self.slist = []
+        self.tlist = []
+        self.rowc = 0
+        ing_list = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Ingredient> .
+                    }""")) for inner in outer]
+        self.ing_dict = {}
+        for i in ing_list:
+            self.ing_dict[re.sub(r"(?<=\w)([A-Z])", r" \1",str(i)[15:]).lower()] = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"+(str(i)[15:])+">"
+
+        ing_names = sorted([re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower() for cock in ing_list])
+
+        allergen_list = list(self.allergens.keys())
 
         # Create a new toplevel window to display the advanced query
-        advanced_window = tk.Toplevel(self)
-        x, y = self.winfo_x(), self.winfo_y()
-        advanced_window.geometry(f"600x500+{x}+{y}")
-        advanced_window.title("Advanced Query")
+        self.advanced_window = tk.Toplevel(self)
+        
+        self.advanced_window.geometry(f"600x500+{x}+{y}")
+        self.advanced_window.title("Advanced Query")
 
 
         # Create a new frame to hold the advanced query interface
-        advanced_frame = tk.Frame(advanced_window, bg="#2A3439", width="550", height="450")
+        advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450")
         advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
 
         # Add a label to the advanced query frame
-        tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576").pack(padx=10, pady=10)
-
-
+        advl = tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
+        advl.place(x=20, y=20)
         # Add a button to return to the main interface
-        tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(advanced_window), fg="#E3DAC9", bg="#007EA7").pack(pady=10)
+        bb = tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.advanced_window), fg="#E3DAC9", bg="#007EA7")
+        bb.place(x=20, y=55)
 
+        
         adv_can = tk.Canvas(advanced_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
-        adv_can.pack(expand=1, fill = "both")
+        adv_can.place(x=0,y=100)
         subf=tk.Frame(adv_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
 
         def add_filter():
-            contains_v = tk.IntVar()
+            contains_v = tk.StringVar()
+            contains_v.set("contains/omits")
+            ioa = tk.StringVar()
+            ioa.set("select an option")
+            ing = tk.StringVar()
+            ing.set("")
+            self.flist.append(contains_v)
+            self.slist.append(ioa)
+            self.tlist.append(ing)
 
-            tk.Radiobutton(subf, text="contains", variable=contains_v, value=1, font=(("Courier New Bold"), 10)).place(x=320,y=190 +(self.rowc*65), anchor="w")
-            tk.Radiobutton(subf, text="omits", variable=contains_v, value=0, font=(("Courier New Bold"), 10)).place(x=320, y=220+(self.rowc*65), anchor="w")
 
+            def display_drop():
+                if ioa.get() == "ingredient":
+                    ing.set("select an ingredient")
+                    filt["menu"] = ingmenu
+                    return ioa.get()
+                elif ioa.get() == "allergen":
+                    ing.set("select an allergen")
+                    filt["menu"] = almenu
+
+            t = ttk.Menubutton(subf, textvariable=contains_v)
+            drop = tk.Menu(t, tearoff=False)
+            drop.add_radiobutton(label="contains", value="contains", variable=contains_v, command=lambda: contains_v.get())
+            drop.add_radiobutton(label="omits", value="omits", variable=contains_v, command=lambda : contains_v.get())
+            drop.configure(font=(("Courier New Bold"),10))
+            t["menu"] = drop
+
+            ingal = ttk.Menubutton(subf, textvariable=ioa)
+            dropioa = tk.Menu(ingal, tearoff=False)
+            dropioa.add_radiobutton(label="ingredient", value="ingredient",variable=ioa, command = display_drop)
+            dropioa.add_radiobutton(label="allergen", value="allergen", variable=ioa, command = display_drop)
+            dropioa.configure(font=(("Courier New Bold"), 10))
+            ingal["menu"] = dropioa
+
+            filt = ttk.Menubutton(subf, textvariable=ing)
+            almenu = tk.Menu(filt, tearoff=False)
+            almenu.configure(font=(("Courier New Bold"), 10))
+            for a in list(self.allergens.keys()):
+                almenu.add_radiobutton(label=a, value=a, variable=ing, command = ing.get())
+
+            ingmenu = tk.Menu(filt, tearoff=False)
+            ingmenu.configure(font=(("Courier New Bold"), 10))
+            for i in ing_names:
+                ingmenu.add_radiobutton(label=i, value=i, variable=ing, command = ing.get())
+
+
+            t.place(x=0,y=0+(self.rowc*65))
+            ingal.place(x=120, y=0+(self.rowc*65))
+            filt.place(x=240, y=0+(self.rowc*65))
+            #self.clist.append(t)
             self.rowc += 1
-
+ 
         add_filter()
 
-        tk.Button(adv_can, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter()).pack(pady=10)
-        adv_can.create_window((0, 100), window=subf)
 
-        advanced_window.grab_set()
-        advanced_window.resizable(False, False)
+        # add submit button
+        sb = tk.Button(advanced_frame, text="search", font=(("Courier New Bold"),10), command=lambda: self.query_results(), fg="#E3DAC9", bg="#007EA7")
+        sb.place(x=200, y=55)
+
+            
+
+        addbut = tk.Button(advanced_frame, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter())
+
+        addbut.place(x=85, y=55)
+        adv_can.create_window((300, 250), window=subf, anchor="center")
+
+        self.advanced_window.grab_set()
+        self.advanced_window.resizable(False, False)
+
+    def query_results(self):
+        # Hide the main window
+        self.withdraw()
+        self.advanced_window.withdraw()
+
+        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    }""")) for inner in outer])
+
+        for i in range(len(self.flist)):
+            print(self.ing_dict[self.tlist[i].get()])
+            results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                { 
+                    ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+self.ing_dict[self.tlist[i].get()]+""" . 
+                }""")) for inner in outer])
+            if self.flist[i].get() == "contains":
+                available = available & results
+            elif self.flist[i].get() == "omits":
+                available = available - results
+
+        print(available)
+
+        # Create a new toplevel window to display the advanced query
+        self.q_window = tk.Toplevel(self)
+        x, y = self.winfo_x(), self.winfo_y()
+        self.q_window.geometry(f"600x500+{x}+{y}")
+        self.q_window.title("Advanced Query")
+
+
+        # Create a new frame to hold the advanced query interface
+        q_frame = tk.Frame(self.q_window, bg="#2A3439", width="550", height="450")
+        q_frame.pack(padx=10, pady=10, fill="both", expand=True)
+
+
+        # Add a label to the advanced query frame
+        ql = tk.Label(q_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ql.place(x=20, y=20)
+        # Add a button to return to the main interface
+        bb = tk.Button(q_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.advanced_query(), fg="#E3DAC9", bg="#007EA7")
+        bb.place(x=20, y=55)
+
+        
+        q_can = tk.Canvas(q_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        q_can.place(x=0,y=100)
+        subf=tk.Frame(q_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
+
+
+        q_can.create_window((300, 250), window=subf, anchor="center")
+
+        self.q_window.grab_set()
+        self.q_window.resizable(False, False)
 
 
     def back_to_main(self, f):
@@ -295,6 +426,7 @@ class App(tk.Tk):
         
         # Show the main window
         self.deiconify()
+
 
 
 app = App()
