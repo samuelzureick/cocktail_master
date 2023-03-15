@@ -78,6 +78,21 @@ class App(tk.Tk):
             "Tree Nuts": tk.BooleanVar(value=False),
         }
 
+        self.allergen_dict = {"Celery" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Celery>",
+                        "Crustaceans" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Crustaceans>",
+                        "Eggs" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Egg>",
+                        "Fish" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Fish>",
+                        "Gluten" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Gluten>",
+                        "Lupin" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Lupin>",
+                        "Dairy" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Dairy>",
+                        "Molluscs" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Molluscs>",
+                        "Mustard" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mustard>",
+                        "Peanuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Peanuts>",
+                        "Sesame" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sesame>",
+                        "Soybeans" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Soybeans>",
+                        "Sulphites" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sulphites>",
+                        "Tree Nuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#TreeNuts>"}
+
         for i, allergen in enumerate(self.allergens):
             tk.Checkbutton(allergens_frame, bg="#2A3439", text=allergen,font=(("Courier New Bold"), 10), variable=self.allergens[allergen], fg="#E3DAC9").grid(
                 row=i // 2, column=i % 2, sticky="w")
@@ -239,21 +254,6 @@ class App(tk.Tk):
 
         tframe = tk.Frame(can, width=550, height=450,borderwidth = 0)
         tframe.configure(bg="#2A3439")
-        
-        allergen_dict = {"Celery" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Celery>",
-                        "Crustaceans" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Crustaceans>",
-                        "Eggs" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Egg>",
-                        "Fish" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Fish>",
-                        "Gluten" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Gluten>",
-                        "Lupin" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Lupin>",
-                        "Dairy" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Dairy>",
-                        "Molluscs" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Molluscs>",
-                        "Mustard" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mustard>",
-                        "Peanuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Peanuts>",
-                        "Sesame" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sesame>",
-                        "Soybeans" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Soybeans>",
-                        "Sulphites" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Sulphites>",
-                        "Tree Nuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#TreeNuts>"}
 
         acceptable = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
@@ -261,7 +261,7 @@ class App(tk.Tk):
                     }""")) for inner in outer])
 
         for aller in selected_allergens:
-            avoid = allergen_dict[aller]
+            avoid = self.allergen_dict[aller]
             
             bad = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                 { 
@@ -421,12 +421,15 @@ class App(tk.Tk):
                     }""")) for inner in outer])
 
         for i in range(len(self.flist)):
-            print(self.ing_dict[self.tlist[i].get()])
+            if self.slist[i].get() == "ingredient":
+                v = self.ing_dict[self.tlist[i].get()]
+            elif self.slist[i].get() == "allergen":
+                v = self.allergen_dict[self.tlist[i].get()]
             results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                 { 
                     ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
                     ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+self.ing_dict[self.tlist[i].get()]+""" . 
+                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+v+""" . 
                 }""")) for inner in outer])
             if self.flist[i].get() == "contains":
                 available = available & results
@@ -434,6 +437,7 @@ class App(tk.Tk):
                 available = available - results
 
         final = sorted([re.sub(r"(?<=\w)([A-Z])", r" \1",str(cockt)[15:]).lower() for cockt in list(available)])
+        print(final)
 
         # Create a new toplevel window to display the advanced query
         self.q_window = tk.Toplevel(self)
