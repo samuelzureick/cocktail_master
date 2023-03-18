@@ -160,8 +160,37 @@ class App(tk.Tk):
     def menugen(self):
         # Hide the main window
         self.withdraw()
-        self.advanced_window.withdraw()
+        self.advanced_window.withdraw
 
+        acceptable_spirits = [
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Tequila>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Calvados>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AppleJack>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Armagnac>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cognac>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Grappa>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Pisco>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Genever>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#LondonDryGin>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OldTomGin>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Baijiu>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cachaca>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BataviaArrack>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Rum>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OverproofRum>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DarkRum>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Dairy>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BlackStrapRum>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DemeraraRum>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RhumAgricole>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Bourbon>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#rye>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#IrishWhiskey>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Scotch>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#IslayScotch>",
+                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BlendedScotch>"]
         available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
@@ -214,6 +243,46 @@ class App(tk.Tk):
     def search(self):
         query = self.search_entry.get()
         self.getQuery(query)
+
+    def menugen(self):
+    # Hide the main window
+        self.withdraw()
+
+        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    }""")) for inner in outer])
+
+
+        # Create a new toplevel window to display the advanced query
+        self.m_window = tk.Toplevel(self)
+        x, y = self.winfo_x(), self.winfo_y()
+        self.m_window.geometry(f"600x500+{x}+{y}")
+        self.m_window.title("Menu Generated: ")
+
+
+        # Create a new frame to hold the advanced query interface
+        m_frame = tk.Frame(self.m_window, bg="#2A3439", width="550", height="450")
+        m_frame.pack(padx=10, pady=10, fill="both", expand=True)
+
+
+        # Add a label to the advanced query frame
+        ql = tk.Label(m_frame, text="Advanced Query Results", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ql.place(x=20, y=20)
+        # Add a button to return to the main interface
+        bb = tk.Button(m_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.m_window), fg="#E3DAC9", bg="#007EA7")
+        bb.place(x=20, y=55)
+
+        
+        m_can = tk.Canvas(m_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        m_can.place(x=0,y=100)
+        subf=tk.Frame(m_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
+
+
+        m_can.create_window((300, 250), window=subf, anchor="center")
+
+        self.m_window.grab_set()
+        self.m_window.resizable(False, False)
 
 
     def allergen_search(self):
@@ -345,6 +414,12 @@ class App(tk.Tk):
         subf=tk.Frame(adv_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
 
         def add_filter():
+            adv_can.configure(scrollregion=subf.bbox("all"))
+            adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=subf.bbox("all")))
+
+            adv_can.config(yscrollcommand=self.scroll.set)
+            self.scroll.config(command=adv_can.yview)
+
             contains_v = tk.StringVar()
             contains_v.set("contains/omits")
             ioa = tk.StringVar()
@@ -396,6 +471,13 @@ class App(tk.Tk):
             #self.clist.append(t)
             self.rowc += 1
  
+        
+        self.scroll = tk.Scrollbar(advanced_frame)
+        self.scroll.pack(side="right", fill="y")
+        adv_can.config(yscrollcommand=self.scroll.set)
+        adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
+        self.scroll.config(command=adv_can.yview)
+
         add_filter()
 
         # add submit button
@@ -443,7 +525,7 @@ class App(tk.Tk):
         self.q_window = tk.Toplevel(self)
         x, y = self.winfo_x(), self.winfo_y()
         self.q_window.geometry(f"600x500+{x}+{y}")
-        self.q_window.title("Advanced Query")
+        self.q_window.title("Advanced Query Results")
 
 
         # Create a new frame to hold the advanced query interface
@@ -452,7 +534,7 @@ class App(tk.Tk):
 
 
         # Add a label to the advanced query frame
-        ql = tk.Label(q_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ql = tk.Label(q_frame, text="Advanced Query Results", font=(("Courier New Bold"), 10), fg="#9F4576")
         ql.place(x=20, y=20)
         # Add a button to return to the main interface
         bb = tk.Button(q_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.advanced_query(), fg="#E3DAC9", bg="#007EA7")
