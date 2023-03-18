@@ -11,7 +11,7 @@ import re
 import types
 import string
 
-for i in range(16,30):
+for i in range(25,35):
 	addy = "https://punchdrink.com/recipe-archives/?page="+str(i)
 	owlready2.JAVA_EXE = "C:\\Users\\szure\\Downloads\\Protege-5.5.0-win\\Protege-5.5.0\\jre\\bin\\java.exe"
 	onto_path.append(".")
