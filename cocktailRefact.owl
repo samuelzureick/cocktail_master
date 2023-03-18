@@ -71,6 +71,11 @@
   <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
 </owl:Class>
 
+<owl:Class rdf:about="#AlcoholicIngredient">
+  <rdfs:subClassOf rdf:resource="#Ingredient"/>
+  <owl:disjointWith rdf:resource="#NaIngredient"/>
+</owl:Class>
+
 <owl:Class rdf:about="#AgarAgar">
   <rdfs:subClassOf rdf:resource="#Modifiers"/>
 </owl:Class>
@@ -97,11 +102,6 @@
 
 <owl:Class rdf:about="#Spirit">
   <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
-</owl:Class>
-
-<owl:Class rdf:about="#AlcoholicIngredient">
-  <rdfs:subClassOf rdf:resource="#Ingredient"/>
-  <owl:disjointWith rdf:resource="#NaIngredient"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Allergen">
@@ -158,6 +158,16 @@
 
 <owl:Class rdf:about="#FortifiedWine">
   <rdfs:subClassOf rdf:resource="#WineIngredient"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WineIngredient">
+  <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#containsAllergen"/>
+      <owl:someValuesFrom rdf:resource="#Sulphites"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
 </owl:Class>
 
 <owl:Class rdf:about="#AnejoTequila">
@@ -231,18 +241,12 @@
   <rdfs:subClassOf rdf:resource="#WineIngredient"/>
 </owl:Class>
 
-<owl:Class rdf:about="#WineIngredient">
-  <rdfs:subClassOf rdf:resource="#AlcoholicIngredient"/>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#containsAllergen"/>
-      <owl:someValuesFrom rdf:resource="#Sulphites"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-</owl:Class>
-
 <owl:Class rdf:about="#Sulphites">
   <rdfs:subClassOf rdf:resource="#MajorAllergen"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MajorAllergen">
+  <rdfs:subClassOf rdf:resource="#Allergen"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Baijiu">
@@ -378,10 +382,6 @@
 
 <owl:Class rdf:about="#Celery">
   <rdfs:subClassOf rdf:resource="#MajorAllergen"/>
-</owl:Class>
-
-<owl:Class rdf:about="#MajorAllergen">
-  <rdfs:subClassOf rdf:resource="#Allergen"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Chambord">
@@ -4521,6 +4521,1014 @@ Strain into the absinthe-rinsed coupe.</rdfs:comment>
 1/4 ounce lemon juice</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#MoreSupreme">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#RhumAgricole"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Campari"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: freshly cracked black pepper</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces rhum agricole, preferably Rhum Clément Select Barrel
+3/4 ounce lime juice
+1/2 ounce cane syrup
+1/4 ounce Campari</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients, except Campari, in a mixing tin and shake with ice.
+Strain into a chilled cocktail glass.
+Slowly pour Campari against the inside edge of the glass.
+Garnish with freshly cracked black pepper.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#TigerMoney">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Drambuie"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Honey"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and shake with ice.
+Strain into a rocks glass over a large ice cube.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce Paranubes Oaxacan rum
+1 ounce lemon juice
+1/2 ounce Drambuie
+1/2 ounce blueberry-honey syrup (see Editor’s Note)</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#ManhattanHighball">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rye"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Tonic"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In a highball glass with a long ice spear, add the rye and sweet vermouth.
+Top with tonic.
+Garnish with an expressed and discarded orange peel and a maraschino cherry.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: expressed and discarded orange zest, maraschino cherry</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce rye, chilled (preferably Bulleit)
+1 ounce sweet vermouth, chilled (preferably Mancino Rosso)
+tonic water, to top</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Rainmaker">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#PineappleJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Benedictine"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and shake with ice.
+Strain into a chilled cocktail glass.
+Garnish with lime salt.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces white rum, preferably Independent Distilling
+3/4 ounce lemon juice
+1/2 ounce pineapple cordial (see Editor’s Note)
+1/4 ounce Bénédictine</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: lime salt</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Dante’sJungleBird">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Campari"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Amaro"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AppleJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a small water glass over ice.
+Stir to integrate.
+Garnish with orange wedge, Luxardo cherry and pineapple frond.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3/4 ounce rum, preferably Plantation Stiggins' Fancy Pineapple Rum
+1/2 ounce Campari
+1/4 ounce Zucca Rabarbaro Amaro
+2 1/2 ounces pineapple juice
+1 barspoon lime juice</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: orange wedge, Luxardo cherry, pineapple frond</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#FogCutter">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Cognac"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Orgeat"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmontilladoSherry"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce aged Martinique rum, preferably Neisson Élevé Sous Bois
+1/2 ounce Cognac
+1/2 ounce London dry gin
+1 ounce lemon juice
+3/4 ounce orgeat (see Editor's Note, or Small Hand Foods)
+1/2 ounce amontillado sherry</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a cocktail shaker and add 1 cup crushed ice. Shake for 5 seconds.
+Pour into a tiki mug and top with another cup of crushed ice.
+Garnish with an orange peel, first expressing its oils over the cocktail, then twirling it into a floret, a mint bouquet, orchid, and a swizzle stick and straw.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint bouquet, orange floret, edible orchid, swizzle stick, straw</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Baldwin’s(easy)SherryColada">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmontilladoSherry"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AppleJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#CoconutLiquor"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: pineapple wedge, pineapple fronds, Angostura bitters (optional)</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all the ingredients in a cocktail shaker. Add ice and shake until chilled, about 10 seconds.
+Pour into a Zombie or highball glass. Add crushed ice to fill the glass.
+Garnish with a pineapple wedge, pineapple fronds, and Angostura bitters (if desired).</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces amontillado sherry
+1 ounce pineapple juice
+1 ounce coconut cream
+3/4 ounce lemon juice</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#FrenchManhattan">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Cognac"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Cointreau"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AngosturaBitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Add the Cognac, sweet vermouth, Grand Mariner, and Bitters to a cocktail mixing glass.
+Add ice and stir until well chilled.
+Strain into a chilled coupe glass.
+Garnish with the cherry.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces Cognac
+1 1/2 ounces sweet vermouth
+1/4 ounce Grand Marnier or Cointreau
+1 dash orange bitters or Angostura bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: candied amarena cherry or maraschino cherry  </rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#JuneNJuice">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Brandy"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AppleJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#CoconutLiquor"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Bitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce London dry gin, preferably Oxley
+1 ounce pear brandy, preferably Purkhart Pear Williams Brand
+1 ounce lemon juice
+1 ounce pineapple juice
+1 ounce coconut cream
+3 dashes Bittermens Burlesque Bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint bouquet</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a shaker tin with pebble or crushed ice.
+Shake until chilled and pour into a Collins glass.
+Top with more pebble or crushed ice.
+Garnish with mint.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Necromancer">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#RhumAgricole"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#FruitJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#CocchiAmericano"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#VelvetFalernum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Absinthe"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounce rhum agricole, preferably Neisson Blanc
+3/4 ounce grapefruit juice 
+3/4 ounce Cocchi Americano 
+1/2 ounce falernum, preferably John D. Taylor's Velvet Falernum
+1 dash absinthe, preferably Letherbee</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and shake with ice.
+Strain into a chilled coupe.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#HouseNo.3">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Scotch"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmontilladoSherry"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Sherry"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AngosturaBitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Bitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Tea"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing glass over ice and stir until chilled.
+Strain into a chilled coupe.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce scotch, preferably Bank Note
+1/2 ounce amontillado sherry, preferably Lustau
+1/2 ounce manzanilla sherry, preferably Lustau
+1/2 ounce dry vermouth, preferably Dolin
+1/2 ounce blanc vermouth, preferably Dolin
+2 dashes Angostura bitters 
+1 dash orange bitters 
+1 teaspoon coconut water syrup (see Editor’s Note)</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AutumnInNewYork">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rye"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Bitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 parts Knob Creek® Rye
+1 part fig-infused sweet vermouth (see Editor’s Note)
+2 dashes Fee Brothers black walnut bitters
+1 dash Fee Brothers molasses bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: fig slice, walnut halves</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine ingredients in a mixing glass over ice and stir.
+Strain over a big cube in a double Old Fashioned glass.
+Garnish with a fig slice and a handful of walnut halves.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AbigailGullo’sBoulevardier">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Whiskey"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Campari"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: orange peel</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing glass over cracked ice and stir until chilled.
+Strain into a rocks glass over a large ice cube.
+Garnish with orange peel.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces rye whiskey, preferably Rittenhouse Rye
+3/4 ounces sweet vermouth, preferably La Quintinye Vermouth Rouge
+3/4 ounces Campari</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#VolunteerParkSwizzle">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Amaro"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Honey"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint, lime wheel</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 ounce Jamaican rum, preferably Smith &amp; Cross
+3/4 ounce Santa Maria al Monte amaro
+1/2 ounce ginger syrup (see Editor's Note)
+1/4 ounce honey
+3/4 ounce lime juice
+1/3 ounce Amaro di Angostura, to float</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a swizzle glass and add crushed ice.
+Using a swizzle stick or bar spoon, agitate the ingredients until incorporated.
+Add more crushed ice and garnish with mint and a lime wheel.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#EverythingNice">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rye"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Bitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AngosturaBitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 parts Knob Creek® Rye
+¼ part green Chartreuse oleo saccharum (see Editor’s Note)
+⅛ part fresh ginger juice (see Editor’s Note)
+3 dashes Regans' orange bitters
+2 dashes Angostura bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine ingredients in a mixing glass over ice and stir.
+Strain over a big cube in a double Old-Fashioned glass.
+Garnish with an expressed lemon twist.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: lemon twist</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Cali-fornicationOnTheBeach">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vodka"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#BiancoVermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Amaro"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Bitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces vodka, preferably SKYY
+1/2 ounce apricot vodka, preferably SKYY California Apricot
+3/4 ounce orange- and cranberry-infused bianco vermouth (see Editor's Note)
+1/2 ounce Amaro Angeleno
+2 dashes Miracle Mile Sour Cherry Bitters
+2 dashes Peychaud’s Bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: dehydrated lime wheel, decorative mermaid</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing glass over ice and stir until chilled.
+Strain into a chilled coupe.
+Garnish with a dehydrated lime wheel and a decorative mermaid.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#SpicedSangria">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Aperol"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Add the rum and Aperol to a Collins glass, then fill the glass with ice cubes.
+Top with Fever-Tree Spiced Orange Ginger Ale.
+Garnish with a cinnamon stick and orange wedge.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Bacardi Superior Rum
+1 ounce Aperol
+Fever-Tree Spiced Orange Ginger Ale</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: cinnamon stick, orange wedge</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#PinkG&amp;tWarmer">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Tonic"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: Angostura bitters, orange wedge</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Add the gin to a highball or large wine glass, then fill with ice cubes.
+Top with Fever-Tree Indian Tonic Water.
+Garnish with two dashes Angostura bitters and an orange wedge.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Farmer’s Botanical Organic Gin
+Fever-Tree Indian Tonic Water</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Allegory’sPiscoSour">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Pisco"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gomme"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Egg"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Soda"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Caravedo pisco
+1/2 ounce lime juice
+1/2 ounce lemon juice
+1/2 ounce gomme simple syrup, (1:1, sugar to water)
+1/2 ounce rich simple syrup , (2:1, sugar to water)
+1 egg white
+1/2 ounce soda water, preferably Topo Chico</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients, except for the soda, in a tin with ice and shake for 7 seconds.
+Strain the ice, add the soda water to the tin, and reverse dry-shake the cocktail for 10 to 15 seconds.
+Fine-strain into a coupe glass.
+Dash Angostura bitters over the top of the cocktail.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: Angostura bitters</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AvernaRitual">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmaroAverna"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Averna</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: an assortment of seasonal citrus zests (lemon, orange) and herbs (sage, mint, lavender, thyme or rosemary)</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pour Averna into a small tumbler or brandy snifter and add three ice cubes to the glass.
+Add lemon or orange zest and/or a seasonal herb, such as sage in the fall, rosemary in the winter, lavender in the spring or mint in the summer.
+Gently swirl the glass to blend the aromatics.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#GiuseppeGonzález’sJungleBird">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AppleJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Campari"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces black rum, preferably Cruzan
+1 1/2 ounces pineapple juice
+3/4 ounce Campari
+1/2 ounce lime juice
+1/2 ounce simple syrup</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and shake with ice.
+Strain into a large rocks glass over a large ice cube.
+Garnish with orange slice.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: orange slice</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#BananaSpider">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Egg"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Pisco"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Banana"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and whip shake.
+Add ice and shake.
+Strain into a chilled coupe.
+Garnish with Angostura bitters.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 egg white
+1 1/2 ounces pisco 
+3/4 ounce lemon juice
+1/2 ounce banana liqueur, preferably Giffard Banane du Brésil
+1/4 ounce simple syrup</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: Angostura bitters</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Metropolis">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Cognac"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Sherry"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Vermouth"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Brandy"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Tea"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Rémy Martin 1738 Cognac
+¾ ounce Lustau Capataz Andrés cream sherry
+½ ounce Carpano Antica sweet vermouth
+1 teaspoon pear brandy (Clear Creek or Massenez preferred)
+1 teaspoon demerara syrup (2 parts demerara sugar:1 part water)</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Stir all ingredients in a mixing glass with ice.
+Strain into a coupe glass.
+Twist lemon peel over the glass to express the oils, then discard the lemon peel.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: Lemon peel</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AvernaLimonata">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmaroAverna"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LemonJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#SimpleSyrup"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Soda"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint, rosemary or sage</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Averna
+1 ounce fresh lemon juice
+1/2 ounce simple syrup
+soda water</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Add Averna, lemon juice and simple syrup to a chilled Collins glass filled with crushed ice.
+Stir or swizzle to combine.
+Top with chilled soda water, adding more crushed ice if needed.
+Garnish with fresh seasonal herbs, such as mint, rosemary or sage.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Queen’sRoad">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Rum"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#OrangeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#LimeJuice"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Gin"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Honey"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AngosturaBitters"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 1/2 ounces aged rum, preferably Zacapa or El Dorado
+1/2 ounce orange juice
+1/2 ounce lime juice
+1/2 ounce ginger syrup (1:1 fresh ginger juice to sugar, blended)
+1/2 ounce honey syrup (1:1, honey:water)
+1 dash Angostura bitters</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combine all ingredients in a mixing tin and shake with ice.
+Strain into a chilled rocks glass over ice.
+Garnish with mint and orange peel.</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint, orange peel</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#CaffèTonic">
+  <rdfs:subClassOf rdf:resource="#Cocktail"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#AmaroAverna"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Coffee"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#contains"/>
+      <owl:someValuesFrom rdf:resource="#Tonic"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Garnish: mint</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2 ounces Averna
+2 ounces cold brew coffee
+2 ounces tonic water</rdfs:comment>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Add Averna and cold brew coffee to a chilled Collins glass filled with crushed ice.
+Stir or swizzle to combine.
+Top with chilled tonic water, adding more crushed ice if needed.
+Garnish with fresh mint.</rdfs:comment>
+</owl:Class>
+
 <owl:Thing rdf:about="#agaveNectar">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </owl:Thing>
@@ -4946,190 +5954,59 @@ Strain into the absinthe-rinsed coupe.</rdfs:comment>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AgarAgar"/>
-    <rdf:Description rdf:about="#CasterSugar"/>
-    <rdf:Description rdf:about="#CitricAcid"/>
-    <rdf:Description rdf:about="#Gelatin"/>
-    <rdf:Description rdf:about="#LacticAcid"/>
-    <rdf:Description rdf:about="#MalicAcid"/>
-    <rdf:Description rdf:about="#TartaricAcid"/>
-    <rdf:Description rdf:about="#XanthamGum"/>
+    <rdf:Description rdf:about="#Kahlua"/>
+    <rdf:Description rdf:about="#MrBlack"/>
+    <rdf:Description rdf:about="#PatronXO"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AgaveNectar"/>
-    <rdf:Description rdf:about="#Gomme"/>
-    <rdf:Description rdf:about="#Grenadine"/>
-    <rdf:Description rdf:about="#Honey"/>
-    <rdf:Description rdf:about="#Orgeat"/>
-    <rdf:Description rdf:about="#PassionfruitSyrup"/>
-    <rdf:Description rdf:about="#SimpleSyrup"/>
+    <rdf:Description rdf:about="#HardShake"/>
+    <rdf:Description rdf:about="#LongShake"/>
+    <rdf:Description rdf:about="#ShortShake"/>
+    <rdf:Description rdf:about="#WhipShake"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Amaretto"/>
-    <rdf:Description rdf:about="#CremeDeNoyaux"/>
-    <rdf:Description rdf:about="#Frangelico"/>
+    <rdf:Description rdf:about="#Genever"/>
+    <rdf:Description rdf:about="#LondonDryGin"/>
+    <rdf:Description rdf:about="#OldTomGin"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AmaroAverna"/>
-    <rdf:Description rdf:about="#AmaroMontenegro"/>
-    <rdf:Description rdf:about="#AmaroNonino"/>
-    <rdf:Description rdf:about="#Fernet"/>
-    <rdf:Description rdf:about="#FernetBrancaMenta"/>
-    <rdf:Description rdf:about="#Jagermeister"/>
+    <rdf:Description rdf:about="#FruitIngredient"/>
+    <rdf:Description rdf:about="#MiscIngredient"/>
+    <rdf:Description rdf:about="#Mixers"/>
+    <rdf:Description rdf:about="#Sweetener"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AmericanWhiskey"/>
-    <rdf:Description rdf:about="#IrishWhiskey"/>
-    <rdf:Description rdf:about="#JapaneseWhiskey"/>
-    <rdf:Description rdf:about="#Scotch"/>
+    <rdf:Description rdf:about="#Celery"/>
+    <rdf:Description rdf:about="#Dairy"/>
+    <rdf:Description rdf:about="#Egg"/>
+    <rdf:Description rdf:about="#Gluten"/>
+    <rdf:Description rdf:about="#Peanuts"/>
+    <rdf:Description rdf:about="#Sulphites"/>
+    <rdf:Description rdf:about="#TreeNuts"/>
+    <rdf:Description rdf:about="#Wheat"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AngosturaBitters"/>
-    <rdf:Description rdf:about="#OrangeBitters"/>
-    <rdf:Description rdf:about="#PeychaudsBitters"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AppleJuice"/>
-    <rdf:Description rdf:about="#CranberryJuice"/>
-    <rdf:Description rdf:about="#GrapefruitJuice"/>
-    <rdf:Description rdf:about="#LemonJuice"/>
-    <rdf:Description rdf:about="#LimeJuice"/>
-    <rdf:Description rdf:about="#OrangeJuice"/>
-    <rdf:Description rdf:about="#PineappleJuice"/>
-    <rdf:Description rdf:about="#PomegraniteJuice"/>
-    <rdf:Description rdf:about="#TomatoJuice"/>
-    <rdf:Description rdf:about="#Verjus"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#AppleSlice"/>
-    <rdf:Description rdf:about="#Banana"/>
-    <rdf:Description rdf:about="#PineappleChunk"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Armagnac"/>
-    <rdf:Description rdf:about="#Cognac"/>
-    <rdf:Description rdf:about="#Grappa"/>
-    <rdf:Description rdf:about="#Pisco"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BananeDeBrazil"/>
-    <rdf:Description rdf:about="#Chambord"/>
-    <rdf:Description rdf:about="#CherryHeering"/>
-    <rdf:Description rdf:about="#Cointreau"/>
-    <rdf:Description rdf:about="#CremeDeCacao"/>
-    <rdf:Description rdf:about="#CremeDeCassis"/>
-    <rdf:Description rdf:about="#CremeDeMenthe"/>
-    <rdf:Description rdf:about="#CremeDeMure"/>
-    <rdf:Description rdf:about="#CremeDeViolette"/>
-    <rdf:Description rdf:about="#GrandMarnier"/>
-    <rdf:Description rdf:about="#LuxardoMaraschino"/>
-    <rdf:Description rdf:about="#Melonade"/>
-    <rdf:Description rdf:about="#Midori"/>
-    <rdf:Description rdf:about="#Passoa"/>
-    <rdf:Description rdf:about="#TripleSec"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BataviaArrack"/>
-    <rdf:Description rdf:about="#Cachaca"/>
-    <rdf:Description rdf:about="#Rum"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Benedictine"/>
-    <rdf:Description rdf:about="#VelvetFalernum"/>
-    <rdf:Description rdf:about="#YellowChartreuse"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BitterLiquor"/>
-    <rdf:Description rdf:about="#FruitLiquor"/>
-    <rdf:Description rdf:about="#HerbalLiquor"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackCoffee"/>
-    <rdf:Description rdf:about="#ColdBrew"/>
-    <rdf:Description rdf:about="#Espresso"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackStrapRum"/>
-    <rdf:Description rdf:about="#DarkRum"/>
-    <rdf:Description rdf:about="#DemeraraRum"/>
-    <rdf:Description rdf:about="#LightRum"/>
-    <rdf:Description rdf:about="#OverproofRum"/>
-    <rdf:Description rdf:about="#RhumAgricole"/>
-    <rdf:Description rdf:about="#SpicedRum"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlackTea"/>
-    <rdf:Description rdf:about="#BreakfastTea"/>
-    <rdf:Description rdf:about="#ChamomileTea"/>
-    <rdf:Description rdf:about="#EarlGreyTea"/>
-    <rdf:Description rdf:about="#GreenTea"/>
-    <rdf:Description rdf:about="#IcedTea"/>
-    <rdf:Description rdf:about="#JasmineTea"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Blended"/>
-    <rdf:Description rdf:about="#Built"/>
-    <rdf:Description rdf:about="#Poured"/>
-    <rdf:Description rdf:about="#Shaken"/>
-    <rdf:Description rdf:about="#Stirred"/>
-  </owl:members>
-</owl:AllDisjointClasses>
-
-<owl:AllDisjointClasses>
-  <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#BlendedScotch"/>
-    <rdf:Description rdf:about="#CambletownScotch"/>
-    <rdf:Description rdf:about="#HighlandsScotch"/>
-    <rdf:Description rdf:about="#IslayScotch"/>
-    <rdf:Description rdf:about="#LowlandsScotch"/>
+    <rdf:Description rdf:about="#Brandy"/>
+    <rdf:Description rdf:about="#Gin"/>
+    <rdf:Description rdf:about="#RiceSpirit"/>
+    <rdf:Description rdf:about="#SugarSpirit"/>
+    <rdf:Description rdf:about="#Vodka"/>
+    <rdf:Description rdf:about="#Whiskey"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
@@ -5156,59 +6033,190 @@ Strain into the absinthe-rinsed coupe.</rdfs:comment>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Brandy"/>
-    <rdf:Description rdf:about="#Gin"/>
-    <rdf:Description rdf:about="#RiceSpirit"/>
-    <rdf:Description rdf:about="#SugarSpirit"/>
-    <rdf:Description rdf:about="#Vodka"/>
-    <rdf:Description rdf:about="#Whiskey"/>
+    <rdf:Description rdf:about="#BlendedScotch"/>
+    <rdf:Description rdf:about="#CambletownScotch"/>
+    <rdf:Description rdf:about="#HighlandsScotch"/>
+    <rdf:Description rdf:about="#IslayScotch"/>
+    <rdf:Description rdf:about="#LowlandsScotch"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Celery"/>
-    <rdf:Description rdf:about="#Dairy"/>
-    <rdf:Description rdf:about="#Egg"/>
-    <rdf:Description rdf:about="#Gluten"/>
-    <rdf:Description rdf:about="#Peanuts"/>
-    <rdf:Description rdf:about="#Sulphites"/>
-    <rdf:Description rdf:about="#TreeNuts"/>
-    <rdf:Description rdf:about="#Wheat"/>
+    <rdf:Description rdf:about="#Blended"/>
+    <rdf:Description rdf:about="#Built"/>
+    <rdf:Description rdf:about="#Poured"/>
+    <rdf:Description rdf:about="#Shaken"/>
+    <rdf:Description rdf:about="#Stirred"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#FruitIngredient"/>
-    <rdf:Description rdf:about="#MiscIngredient"/>
-    <rdf:Description rdf:about="#Mixers"/>
-    <rdf:Description rdf:about="#Sweetener"/>
+    <rdf:Description rdf:about="#BlackTea"/>
+    <rdf:Description rdf:about="#BreakfastTea"/>
+    <rdf:Description rdf:about="#ChamomileTea"/>
+    <rdf:Description rdf:about="#EarlGreyTea"/>
+    <rdf:Description rdf:about="#GreenTea"/>
+    <rdf:Description rdf:about="#IcedTea"/>
+    <rdf:Description rdf:about="#JasmineTea"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Genever"/>
-    <rdf:Description rdf:about="#LondonDryGin"/>
-    <rdf:Description rdf:about="#OldTomGin"/>
+    <rdf:Description rdf:about="#BlackStrapRum"/>
+    <rdf:Description rdf:about="#DarkRum"/>
+    <rdf:Description rdf:about="#DemeraraRum"/>
+    <rdf:Description rdf:about="#LightRum"/>
+    <rdf:Description rdf:about="#OverproofRum"/>
+    <rdf:Description rdf:about="#RhumAgricole"/>
+    <rdf:Description rdf:about="#SpicedRum"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#HardShake"/>
-    <rdf:Description rdf:about="#LongShake"/>
-    <rdf:Description rdf:about="#ShortShake"/>
-    <rdf:Description rdf:about="#WhipShake"/>
+    <rdf:Description rdf:about="#BlackCoffee"/>
+    <rdf:Description rdf:about="#ColdBrew"/>
+    <rdf:Description rdf:about="#Espresso"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
 <owl:AllDisjointClasses>
   <owl:members rdf:parseType="Collection">
-    <rdf:Description rdf:about="#Kahlua"/>
-    <rdf:Description rdf:about="#MrBlack"/>
-    <rdf:Description rdf:about="#PatronXO"/>
+    <rdf:Description rdf:about="#BitterLiquor"/>
+    <rdf:Description rdf:about="#FruitLiquor"/>
+    <rdf:Description rdf:about="#HerbalLiquor"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Benedictine"/>
+    <rdf:Description rdf:about="#VelvetFalernum"/>
+    <rdf:Description rdf:about="#YellowChartreuse"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BataviaArrack"/>
+    <rdf:Description rdf:about="#Cachaca"/>
+    <rdf:Description rdf:about="#Rum"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BananeDeBrazil"/>
+    <rdf:Description rdf:about="#Chambord"/>
+    <rdf:Description rdf:about="#CherryHeering"/>
+    <rdf:Description rdf:about="#Cointreau"/>
+    <rdf:Description rdf:about="#CremeDeCacao"/>
+    <rdf:Description rdf:about="#CremeDeCassis"/>
+    <rdf:Description rdf:about="#CremeDeMenthe"/>
+    <rdf:Description rdf:about="#CremeDeMure"/>
+    <rdf:Description rdf:about="#CremeDeViolette"/>
+    <rdf:Description rdf:about="#GrandMarnier"/>
+    <rdf:Description rdf:about="#LuxardoMaraschino"/>
+    <rdf:Description rdf:about="#Melonade"/>
+    <rdf:Description rdf:about="#Midori"/>
+    <rdf:Description rdf:about="#Passoa"/>
+    <rdf:Description rdf:about="#TripleSec"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Armagnac"/>
+    <rdf:Description rdf:about="#Cognac"/>
+    <rdf:Description rdf:about="#Grappa"/>
+    <rdf:Description rdf:about="#Pisco"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AppleSlice"/>
+    <rdf:Description rdf:about="#Banana"/>
+    <rdf:Description rdf:about="#PineappleChunk"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AppleJuice"/>
+    <rdf:Description rdf:about="#CranberryJuice"/>
+    <rdf:Description rdf:about="#GrapefruitJuice"/>
+    <rdf:Description rdf:about="#LemonJuice"/>
+    <rdf:Description rdf:about="#LimeJuice"/>
+    <rdf:Description rdf:about="#OrangeJuice"/>
+    <rdf:Description rdf:about="#PineappleJuice"/>
+    <rdf:Description rdf:about="#PomegraniteJuice"/>
+    <rdf:Description rdf:about="#TomatoJuice"/>
+    <rdf:Description rdf:about="#Verjus"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AngosturaBitters"/>
+    <rdf:Description rdf:about="#OrangeBitters"/>
+    <rdf:Description rdf:about="#PeychaudsBitters"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AmericanWhiskey"/>
+    <rdf:Description rdf:about="#IrishWhiskey"/>
+    <rdf:Description rdf:about="#JapaneseWhiskey"/>
+    <rdf:Description rdf:about="#Scotch"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AmaroAverna"/>
+    <rdf:Description rdf:about="#AmaroMontenegro"/>
+    <rdf:Description rdf:about="#AmaroNonino"/>
+    <rdf:Description rdf:about="#Fernet"/>
+    <rdf:Description rdf:about="#FernetBrancaMenta"/>
+    <rdf:Description rdf:about="#Jagermeister"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Amaretto"/>
+    <rdf:Description rdf:about="#CremeDeNoyaux"/>
+    <rdf:Description rdf:about="#Frangelico"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AgaveNectar"/>
+    <rdf:Description rdf:about="#Gomme"/>
+    <rdf:Description rdf:about="#Grenadine"/>
+    <rdf:Description rdf:about="#Honey"/>
+    <rdf:Description rdf:about="#Orgeat"/>
+    <rdf:Description rdf:about="#PassionfruitSyrup"/>
+    <rdf:Description rdf:about="#SimpleSyrup"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#AgarAgar"/>
+    <rdf:Description rdf:about="#CasterSugar"/>
+    <rdf:Description rdf:about="#CitricAcid"/>
+    <rdf:Description rdf:about="#Gelatin"/>
+    <rdf:Description rdf:about="#LacticAcid"/>
+    <rdf:Description rdf:about="#MalicAcid"/>
+    <rdf:Description rdf:about="#TartaricAcid"/>
+    <rdf:Description rdf:about="#XanthamGum"/>
   </owl:members>
 </owl:AllDisjointClasses>
 
