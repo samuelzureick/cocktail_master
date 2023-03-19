@@ -15,8 +15,7 @@ ImageShow.WindowsViewer.format = "PNG"
 owlready2.JAVA_EXE = "C:\\Users\\szure\\Documents\\Protege-5.5.0\\jre\\bin\\java.exe"
 onto = get_ontology("cocktailRefact.owl")
 onto.load()
-#with onto:
-    #sync_reasoner_pellet()
+
 graph = default_world.as_rdflib_graph()
 o = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"
 
@@ -53,7 +52,8 @@ class App(tk.Tk):
         l1.image = titleText
         l1.pack(side="top", anchor="nw")
 
-
+        #add label to explain the allergen search thing 
+        tk.Label(self, text="Filter for cocktails omitting: ", font=(("Courier New Bold"),10 ),fg="#9F4576", bg="#2A3439").place(x=10,y=165)
         # Create a frame for the allergen checkboxes
         allergens_frame = tk.Frame(self, borderwidth = 0)
         allergens_frame.pack(side="left", padx=10, pady=10)
@@ -94,7 +94,7 @@ class App(tk.Tk):
                         "Tree Nuts" : "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#TreeNuts>"}
 
         for i, allergen in enumerate(self.allergens):
-            tk.Checkbutton(allergens_frame, bg="#2A3439", text=allergen,font=(("Courier New Bold"), 10), variable=self.allergens[allergen], fg="#E3DAC9").grid(
+            tk.Checkbutton(allergens_frame, selectcolor="#304C53", bg="#2A3439", text=allergen,font=(("Courier New Bold"), 10), variable=self.allergens[allergen], fg="#E3DAC9").grid(
                 row=i // 2, column=i % 2, sticky="w")
 
 
@@ -240,54 +240,63 @@ class App(tk.Tk):
         self.q_window.grab_set()
         self.q_window.resizable(False, False)
 
-    def search(self):
-        query = self.search_entry.get()
-        self.getQuery(query)
-
-    def menugen(self):
-    # Hide the main window
-        self.withdraw()
-
-        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                    { 
-                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    }""")) for inner in outer])
-
-
-        # Create a new toplevel window to display the advanced query
-        self.m_window = tk.Toplevel(self)
-        x, y = self.winfo_x(), self.winfo_y()
-        self.m_window.geometry(f"600x500+{x}+{y}")
-        self.m_window.title("Menu Generated: ")
-
-
-        # Create a new frame to hold the advanced query interface
-        m_frame = tk.Frame(self.m_window, bg="#2A3439", width="550", height="450")
-        m_frame.pack(padx=10, pady=10, fill="both", expand=True)
-
-
-        # Add a label to the advanced query frame
-        ql = tk.Label(m_frame, text="Advanced Query Results", font=(("Courier New Bold"), 10), fg="#9F4576")
-        ql.place(x=20, y=20)
-        # Add a button to return to the main interface
-        bb = tk.Button(m_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.m_window), fg="#E3DAC9", bg="#007EA7")
-        bb.place(x=20, y=55)
-
-        
-        m_can = tk.Canvas(m_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
-        m_can.place(x=0,y=100)
-        subf=tk.Frame(m_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
-
-
-        m_can.create_window((300, 250), window=subf, anchor="center")
-
-        self.m_window.grab_set()
-        self.m_window.resizable(False, False)
-
 
     def allergen_search(self):
           # Hide the main window
         self.withdraw()
+
+        def findDrinks():            
+            acceptable = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                    }""")) for inner in outer])
+
+            for aller in selected_allergens:
+                avoid = self.allergen_dict[aller]
+                
+                bad = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+avoid+""" . 
+                    }""")) for inner in outer])
+
+                acceptable -= bad
+            
+
+            for cock in acceptable:
+                name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
+
+                ingredients = cock.comment[0]
+                preperation = cock.comment[1]
+                garnish = cock.comment[2]
+
+                tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
+
+                tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(tframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(tframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                ttk.Separator(tframe, orient="horizontal").pack(fill="x",pady=10)
+
+            sb = tk.Scrollbar(allergen_frame, orient="vertical")
+            sb.configure(command=can.yview)
+
+            sb.pack(side="right", fill="y")
+            can.configure(scrollregion=can.bbox("all"))
+            can.configure(yscrollcommand=sb.set)
+            can.bind('<Configure>', lambda x: can.configure(scrollregion=can.bbox("all")))
+            allergen_frame.bind("<Configure>", lambda event: can.configure(scrollregion=allergen_frame.bbox("all")))
+
+            can.create_window((250, 300), window=tframe, anchor="n")
+            x, y = self.winfo_x(), self.winfo_y()
+            allergen_window.geometry(f"600x501+{x}+{y}")
+            ldl.place_forget()
+            can.yview_moveto(0)
+
+            
 
         # Create a new toplevel window to display the selected allergens
         allergen_window = tk.Toplevel(self)
@@ -314,58 +323,15 @@ class App(tk.Tk):
         can = tk.Canvas(allergen_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
         can.pack(side="left", expand=1, fill = "both",pady=90)
 
-        sb = tk.Scrollbar(allergen_frame, orient=tk.VERTICAL, command=can.yview,bg="#2A3439",borderwidth = 0)
-        sb.pack(side="right", fill=tk.Y)
 
-        can.configure(yscrollcommand=sb.set)
-        can.yview_moveto(0)
-        can.bind('<Configure>', lambda x: can.configure(scrollregion=can.bbox("all")))
+        tframe = tk.Frame(can,bg="#2A3439")
+        ldl = tk.Label(allergen_frame, text="Loading Query Results...", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ldl.place(x=200,y=250)
 
-        tframe = tk.Frame(can, width=550, height=450,borderwidth = 0)
-        tframe.configure(bg="#2A3439")
-
-        acceptable = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                    { 
-                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    }""")) for inner in outer])
-
-        for aller in selected_allergens:
-            avoid = self.allergen_dict[aller]
-            
-            bad = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                { 
-                    ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+avoid+""" . 
-                }""")) for inner in outer])
-
-            acceptable -= bad
-        
-
-        for cock in acceptable:
-            name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
-
-            ingredients = cock.comment[0]
-            preperation = cock.comment[1]
-            garnish = cock.comment[2]
-
-            tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
-
-            tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
-
-            tk.Label(tframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
-
-            tk.Label(tframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
-
-            ttk.Separator(tframe, orient="horizontal").pack(fill="x",pady=10)
-
-
-        can.create_window((0, 100), window=tframe)
-        can.yview_moveto(0)
+        self.after(1000, findDrinks)
 
         # Prevent interaction with the main window while the allergen window is open
         allergen_window.grab_set()
-
 
     def advanced_query(self):
         # Hide the main window
@@ -477,6 +443,7 @@ class App(tk.Tk):
         adv_can.config(yscrollcommand=self.scroll.set)
         adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
         self.scroll.config(command=adv_can.yview)
+        adv_can.yview_moveto(0)
 
         add_filter()
 
@@ -487,39 +454,81 @@ class App(tk.Tk):
         addbut = tk.Button(advanced_frame, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter())
 
         addbut.place(x=85, y=55)
-        adv_can.create_window((300, 250), window=subf, anchor="center")
+        adv_can.create_window((300, 250), window=subf, anchor="n")
 
         self.advanced_window.grab_set()
         self.advanced_window.resizable(False, False)
+    
 
     def query_results(self):
+        def display_results():
+            scrollbar = tk.Scrollbar(q_frame, orient="vertical")
+            scrollbar.pack(side="right", fill="y")
+            q_can.configure(scrollregion=q_can.bbox("all"))
+            q_can.configure(yscrollcommand=scrollbar.set)
+            scrollbar.configure(command=q_can.yview)
+            q_can.bind('<Configure>', lambda x: q_can.configure(scrollregion=q_can.bbox("all")))
+            q_frame.bind("<Configure>", lambda event: q_can.configure(scrollregion=q_can.bbox("all")))
+                
+            q_can.create_window((300, 250), window=subf, anchor="n")
+
+            x, y = self.winfo_x(), self.winfo_y()
+            self.q_window.geometry(f"600x501+{x}+{y}")
+            for cock in self.final:
+                name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
+
+                ingredients = cock.comment[0]
+                preperation = cock.comment[1]
+                garnish = cock.comment[2]
+
+                tk.Label(subf, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
+
+                tk.Label(subf, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(subf, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(subf, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                ttk.Separator(subf, orient="horizontal").pack(fill="x",pady=10)
+
+
+
+            
+
+
+        def get_results():
+            available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                        { 
+                            ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        }""")) for inner in outer])
+
+            for i in range(len(self.flist)):
+                if self.slist[i].get() == "ingredient":
+                    v = self.ing_dict[self.tlist[i].get()]
+                elif self.slist[i].get() == "allergen":
+                    v = self.allergen_dict[self.tlist[i].get()]
+                results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+v+""" . 
+                    }""")) for inner in outer])
+                if self.flist[i].get() == "contains":
+                    available = available & results
+                elif self.flist[i].get() == "omits":
+                    available = available - results
+
+            self.final = list(available)
+            print(self.final)
+            display_results()
+            q_can.yview_moveto(0.0)
+
+
+
         # Hide the main window
         self.withdraw()
         self.advanced_window.withdraw()
-
-        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                    { 
-                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    }""")) for inner in outer])
-
-        for i in range(len(self.flist)):
-            if self.slist[i].get() == "ingredient":
-                v = self.ing_dict[self.tlist[i].get()]
-            elif self.slist[i].get() == "allergen":
-                v = self.allergen_dict[self.tlist[i].get()]
-            results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                { 
-                    ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+v+""" . 
-                }""")) for inner in outer])
-            if self.flist[i].get() == "contains":
-                available = available & results
-            elif self.flist[i].get() == "omits":
-                available = available - results
-
-        final = sorted([re.sub(r"(?<=\w)([A-Z])", r" \1",str(cockt)[15:]).lower() for cockt in list(available)])
-        print(final)
+        self.final = []
 
         # Create a new toplevel window to display the advanced query
         self.q_window = tk.Toplevel(self)
@@ -529,7 +538,7 @@ class App(tk.Tk):
 
 
         # Create a new frame to hold the advanced query interface
-        q_frame = tk.Frame(self.q_window, bg="#2A3439", width="550", height="450")
+        q_frame = tk.Frame(self.q_window, bg="#2A3439")
         q_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
 
@@ -541,17 +550,17 @@ class App(tk.Tk):
         bb.place(x=20, y=55)
 
         
-        q_can = tk.Canvas(q_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        q_can = tk.Canvas(q_frame, width=550, height=350, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        subf=tk.Frame(q_can, borderwidth=0, highlightthickness=0, bg="#2A3439")
         q_can.place(x=0,y=100)
-        subf=tk.Frame(q_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
 
 
-        q_can.create_window((300, 250), window=subf, anchor="center")
-
+        #ld = tk.Label(subf, text="LOADING QUERY RESULTS...", font=(("Courier New Bold"), 10), fg="#2A3439").pack()
         self.q_window.grab_set()
         self.q_window.resizable(False, False)
+        self.after(100,lambda: get_results())
 
-
+        
     def back_to_main(self, f):
         # Store the position of the advanced query window before it is closed
         x, y = f.winfo_x(), f.winfo_y()
