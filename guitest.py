@@ -263,7 +263,8 @@ class App(tk.Tk):
 
                 acceptable -= bad
             
-
+            if list(acceptable) == []:
+                tk.Label(tframe, text="No matching cocktails found...", font=(("Courier New Bold"), 10,), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
             for cock in acceptable:
                 name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
 
@@ -377,8 +378,8 @@ class App(tk.Tk):
         
         adv_can = tk.Canvas(advanced_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
         adv_can.place(x=0,y=100)
-        subf=tk.Frame(adv_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
-
+        subf=tk.Frame(adv_can, borderwidth=0, highlightthickness=0,bg="#2A3439")
+        # need to modify this to add frames to canvas subframe so that i can scroll and pack these elements!!!!!
         def add_filter():
             adv_can.configure(scrollregion=subf.bbox("all"))
             adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=subf.bbox("all")))
@@ -442,10 +443,12 @@ class App(tk.Tk):
         self.scroll.pack(side="right", fill="y")
         adv_can.config(yscrollcommand=self.scroll.set)
         adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
+        advanced_frame.bind('<Configure>', lambda x: adv_can.configure(scrollregion=advanced_frame.bbox("all")))
+
         self.scroll.config(command=adv_can.yview)
         adv_can.yview_moveto(0)
-
         add_filter()
+        
 
         # add submit button
         sb = tk.Button(advanced_frame, text="search", font=(("Courier New Bold"),10), command=lambda: self.query_results(), fg="#E3DAC9", bg="#007EA7")
@@ -474,22 +477,25 @@ class App(tk.Tk):
 
             x, y = self.winfo_x(), self.winfo_y()
             self.q_window.geometry(f"600x501+{x}+{y}")
-            for cock in self.final:
-                name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
+            if self.final==[]:
+                tk.Label(subf, text="No matching cocktails found...", font=(("Courier New Bold"), 10,), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+            else:
+                for cock in self.final:
+                    name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
 
-                ingredients = cock.comment[0]
-                preperation = cock.comment[1]
-                garnish = cock.comment[2]
+                    ingredients = cock.comment[0]
+                    preperation = cock.comment[1]
+                    garnish = cock.comment[2]
 
-                tk.Label(subf, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
+                    tk.Label(subf, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
 
-                tk.Label(subf, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+                    tk.Label(subf, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
-                tk.Label(subf, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+                    tk.Label(subf, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
-                tk.Label(subf, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+                    tk.Label(subf, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
-                ttk.Separator(subf, orient="horizontal").pack(fill="x",pady=10)
+                    ttk.Separator(subf, orient="horizontal").pack(fill="x",pady=10)
 
 
 
