@@ -368,19 +368,20 @@ class App(tk.Tk):
         advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450")
         advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
-        # Add a label to the advanced query frame
-        advl = tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
-        advl.place(x=20, y=20)
-        # Add a button to return to the main interface
-        bb = tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.advanced_window), fg="#E3DAC9", bg="#007EA7")
-        bb.place(x=20, y=55)
-
         
         adv_can = tk.Canvas(advanced_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
-        adv_can.place(x=0,y=100)
+        adv_can.place(x=0,y=0)
         subf=tk.Frame(adv_can, borderwidth=0, highlightthickness=0,bg="#2A3439")
+        adv_can.create_window((230, 100), window=subf, anchor="n")
+
         # need to modify this to add frames to canvas subframe so that i can scroll and pack these elements!!!!!
         def add_filter():
+            self.advanced_window.grab_set()
+            if self.rowc>=7:
+                addbut.config(bg="grey")
+                return
+            ssf = tk.Frame(subf, borderwidth=0, highlightthickness=0, height=30, width=400, bg="#2A3439")
+
             adv_can.configure(scrollregion=subf.bbox("all"))
             adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=subf.bbox("all")))
 
@@ -407,21 +408,21 @@ class App(tk.Tk):
                     ing.set("select an allergen")
                     filt["menu"] = almenu
 
-            t = ttk.Menubutton(subf, textvariable=contains_v)
+            t = ttk.Menubutton(ssf, textvariable=contains_v)
             drop = tk.Menu(t, tearoff=False)
             drop.add_radiobutton(label="contains", value="contains", variable=contains_v, command=lambda: contains_v.get())
             drop.add_radiobutton(label="omits", value="omits", variable=contains_v, command=lambda : contains_v.get())
             drop.configure(font=(("Courier New Bold"),10))
             t["menu"] = drop
 
-            ingal = ttk.Menubutton(subf, textvariable=ioa)
+            ingal = ttk.Menubutton(ssf, textvariable=ioa)
             dropioa = tk.Menu(ingal, tearoff=False)
             dropioa.add_radiobutton(label="ingredient", value="ingredient",variable=ioa, command = display_drop)
             dropioa.add_radiobutton(label="allergen", value="allergen", variable=ioa, command = display_drop)
             dropioa.configure(font=(("Courier New Bold"), 10))
             ingal["menu"] = dropioa
 
-            filt = ttk.Menubutton(subf, textvariable=ing)
+            filt = ttk.Menubutton(ssf, textvariable=ing)
             almenu = tk.Menu(filt, tearoff=False)
             almenu.configure(font=(("Courier New Bold"), 10))
             for a in list(self.allergens.keys()):
@@ -432,12 +433,19 @@ class App(tk.Tk):
             for i in ing_names:
                 ingmenu.add_radiobutton(label=i, value=i, variable=ing, command = ing.get())
 
-            t.place(x=0,y=0+(self.rowc*65))
-            ingal.place(x=120, y=0+(self.rowc*65))
-            filt.place(x=240, y=0+(self.rowc*65))
+            t.place(x=0,y=0)
+            ingal.place(x=120, y=0)
+            filt.place(x=240, y=0)
             #self.clist.append(t)
+            ssf.pack(pady=10)
             self.rowc += 1
- 
+            adv_can.configure(yscrollcommand=self.scroll.set)
+            adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
+            subf.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
+
+            self.scroll.configure(command=adv_can.yview)
+            adv_can.yview_moveto(0)
+
         
         self.scroll = tk.Scrollbar(advanced_frame)
         self.scroll.pack(side="right", fill="y")
@@ -447,17 +455,42 @@ class App(tk.Tk):
 
         self.scroll.config(command=adv_can.yview)
         adv_can.yview_moveto(0)
+
         add_filter()
         
+        def validate_query():
+            if len(["" for t in self.tlist if t.get() == ""]) > 0:
+                errorWindow = tk.Toplevel(self, bg="#2A3439")
+                errorWindow.title("Query Error")
+                errorWindow.geometry("350x120")
+                errorWindow.resizable(False,False)
+                tk.Label(errorWindow, text="search error:\nmissing ingredient/ allergen selection", font=(("Courier New Bold"), 10), bg="#2A3439", fg="#E3DAC9").pack(pady=10)
+                tk.Button(errorWindow, text="Dismiss", command= lambda: errorWindow.destroy(), font=(("Courier New Bold"), 10), bg="#377771", fg="#E3DAC9").pack(pady=10)
+                errorWindow.grab_set()
+            elif len(["" for f in self.flist if f.get() == "contains/omits"]) > 0:
+                errorWindow = tk.Toplevel(self, bg="#2A3439")
+                errorWindow.title("Query Error")
+                errorWindow.geometry("350x120")
+                errorWindow.resizable(False,False)
+                tk.Label(errorWindow, text="Search error:\ncontain/omit selection not complete", font=(("Courier New Bold"), 10), bg="#2A3439", fg="#E3DAC9").pack(pady=10)
+                tk.Button(errorWindow, text="Dismiss", command= lambda: errorWindow.destroy()).pack(pady=10)
+                errorWindow.grab_set()
+            else:
+                self.query_results()
 
         # add submit button
-        sb = tk.Button(advanced_frame, text="search", font=(("Courier New Bold"),10), command=lambda: self.query_results(), fg="#E3DAC9", bg="#007EA7")
+        sb = tk.Button(advanced_frame, text="search", font=(("Courier New Bold"),10), command=lambda: validate_query(), fg="#E3DAC9", bg="#377771")
         sb.place(x=200, y=55)
 
         addbut = tk.Button(advanced_frame, text="add filter", font=(("Courier New Bold"), 10),bg="#377771", fg="#E3DAC9", command=lambda : add_filter())
+        # Add a label to the advanced query frame
+        advl = tk.Label(advanced_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
+        advl.place(x=20, y=20)
+        # Add a button to return to the main interface
+        bb = tk.Button(advanced_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.advanced_window), fg="#E3DAC9", bg="#007EA7")
+        bb.place(x=20, y=55)
 
         addbut.place(x=85, y=55)
-        adv_can.create_window((300, 250), window=subf, anchor="n")
 
         self.advanced_window.grab_set()
         self.advanced_window.resizable(False, False)
