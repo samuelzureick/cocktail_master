@@ -21,11 +21,12 @@ o = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"
 
 import tkinter as tk
 
-cocktails = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+cocktailz = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
                     }""")) for inner in outer])
-cocktails = [re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower() for cock in cocktails]
+cocktails = [re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower() for cock in cocktailz]
+cocktailz = [str(cock)[15:] for cock in cocktailz]
 
 
 class App(tk.Tk):
@@ -130,7 +131,50 @@ class App(tk.Tk):
         self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439", font=(("Courier New Bold"), 10),fg="#E3DAC9")
         scrollbar.config(command=self.cocktail_listbox.yview)
         self.cocktail_listbox.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+        def disp():
+            x, y = self.winfo_x(), self.winfo_y()
+            self.withdraw()
 
+            self.displ = tk.Toplevel(self)
+            
+            self.displ.geometry(f"600x500+{x}+{y}")
+            dispframe = tk.Frame(self.displ, bg="#2A3439", width="550", height="450", borderwidth = 0)
+
+            try:
+                selectedCocktail = self.cocktail_listbox.get(self.cocktail_listbox.curselection())
+                self.displ.title(selectedCocktail)
+
+                match = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"+difflib.get_close_matches(selectedCocktail, cocktailz)[0]+">"
+                selc = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf* """+match+""" .
+                    }""")) for inner in outer][0]
+                print(selc)
+                ingredients = selc.comment[0]
+                preperation = selc.comment[1]
+                garnish = selc.comment[2]
+                tk.Label(dispframe, text=selectedCocktail, font=(("Courier New Bold"), 13), wraplength=220, justify="center").pack(pady=15)
+
+                tk.Label(dispframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(dispframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(dispframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+            except:
+                pass
+
+            # Create a new frame to hold the advanced query interface
+            dispframe.pack(padx=10, pady=10, fill="both", expand=True)
+
+            bb = tk.Button(dispframe, text="back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.displ), fg="#E3DAC9", bg="#007EA7")
+            bb.pack(pady=15)
+            self.displ.grab_set()
+            self.displ.resizable(False, False)
+
+        def dispshell(self):
+            disp()
+
+        self.cocktail_listbox.bind("<<ListboxSelect>>", dispshell)
 
         # Load data into the listbox
         self.load_cocktails()
@@ -241,8 +285,10 @@ class App(tk.Tk):
         self.q_window.resizable(False, False)
 
 
+
     def allergen_search(self):
           # Hide the main window
+        x, y = self.winfo_x(), self.winfo_y()
         self.withdraw()
 
         def findDrinks():            
@@ -292,7 +338,6 @@ class App(tk.Tk):
             allergen_frame.bind("<Configure>", lambda event: can.configure(scrollregion=allergen_frame.bbox("all")))
 
             can.create_window((250, 300), window=tframe, anchor="n")
-            x, y = self.winfo_x(), self.winfo_y()
             allergen_window.geometry(f"600x501+{x}+{y}")
             ldl.place_forget()
             can.yview_moveto(0)
@@ -301,7 +346,6 @@ class App(tk.Tk):
 
         # Create a new toplevel window to display the selected allergens
         allergen_window = tk.Toplevel(self)
-        x, y = self.winfo_x(), self.winfo_y()
 
         allergen_window.geometry(f"600x500+{x}+{y}")
         allergen_window.title("Selected Allergens")
@@ -313,7 +357,7 @@ class App(tk.Tk):
         allergen_frame = tk.Frame(allergen_window, borderwidth = 0)
         allergen_frame.configure(bg="#2A3439")
         allergen_frame.pack() 
-
+        
         selected_allergens = [allergen for allergen in self.allergens if self.allergens[allergen].get()]
         allergen_str = ", ".join(selected_allergens)
 
@@ -365,7 +409,7 @@ class App(tk.Tk):
         self.advanced_window.title("Advanced Query")
 
         # Create a new frame to hold the advanced query interface
-        advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450")
+        advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450", borderwidth = 0)
         advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
         
@@ -377,16 +421,13 @@ class App(tk.Tk):
         # need to modify this to add frames to canvas subframe so that i can scroll and pack these elements!!!!!
         def add_filter():
             self.advanced_window.grab_set()
-            if self.rowc>=7:
+            if self.rowc >=6:
                 addbut.config(bg="grey")
+
+            if self.rowc>=7:
                 return
             ssf = tk.Frame(subf, borderwidth=0, highlightthickness=0, height=30, width=400, bg="#2A3439")
 
-            adv_can.configure(scrollregion=subf.bbox("all"))
-            adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=subf.bbox("all")))
-
-            adv_can.config(yscrollcommand=self.scroll.set)
-            self.scroll.config(command=adv_can.yview)
 
             contains_v = tk.StringVar()
             contains_v.set("contains/omits")
@@ -439,22 +480,10 @@ class App(tk.Tk):
             #self.clist.append(t)
             ssf.pack(pady=10)
             self.rowc += 1
-            adv_can.configure(yscrollcommand=self.scroll.set)
-            adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
-            subf.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
 
-            self.scroll.configure(command=adv_can.yview)
-            adv_can.yview_moveto(0)
 
         
-        self.scroll = tk.Scrollbar(advanced_frame)
-        self.scroll.pack(side="right", fill="y")
-        adv_can.config(yscrollcommand=self.scroll.set)
-        adv_can.bind('<Configure>', lambda x: adv_can.configure(scrollregion=adv_can.bbox("all")))
-        advanced_frame.bind('<Configure>', lambda x: adv_can.configure(scrollregion=advanced_frame.bbox("all")))
 
-        self.scroll.config(command=adv_can.yview)
-        adv_can.yview_moveto(0)
 
         add_filter()
         
@@ -511,8 +540,10 @@ class App(tk.Tk):
             x, y = self.winfo_x(), self.winfo_y()
             self.q_window.geometry(f"600x501+{x}+{y}")
             if self.final==[]:
-                tk.Label(subf, text="No matching cocktails found...", font=(("Courier New Bold"), 10,), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+                ld.place_forget()
+                tk.Label(subf, text="No matching cocktails found...", font=(("Courier New Bold"), 10,), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(side="top")
             else:
+                ld.place_forget()
                 for cock in self.final:
                     name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cock)[15:]).lower()
 
@@ -529,10 +560,6 @@ class App(tk.Tk):
                     tk.Label(subf, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
                     ttk.Separator(subf, orient="horizontal").pack(fill="x",pady=10)
-
-
-
-            
 
 
         def get_results():
@@ -577,7 +604,7 @@ class App(tk.Tk):
 
 
         # Create a new frame to hold the advanced query interface
-        q_frame = tk.Frame(self.q_window, bg="#2A3439")
+        q_frame = tk.Frame(self.q_window, bg="#2A3439", borderwidth = 0)
         q_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
 
@@ -594,7 +621,8 @@ class App(tk.Tk):
         q_can.place(x=0,y=100)
 
 
-        #ld = tk.Label(subf, text="LOADING QUERY RESULTS...", font=(("Courier New Bold"), 10), fg="#2A3439").pack()
+        ld = tk.Label(q_frame, text="LOADING QUERY RESULTS...", font=(("Courier New Bold"), 10), fg="#2A3439")
+        ld.place(x=200, y=150)
         self.q_window.grab_set()
         self.q_window.resizable(False, False)
         self.after(100,lambda: get_results())
