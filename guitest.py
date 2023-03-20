@@ -3,6 +3,7 @@ import tkinter as tk
 from ast import literal_eval
 from tkinter import *
 from tkinter import font, ttk
+import random
 
 import owlready2
 import PIL
@@ -204,85 +205,127 @@ class App(tk.Tk):
     def menugen(self):
         # Hide the main window
         self.withdraw()
-        self.advanced_window.withdraw
-
-        acceptable_spirits = [
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Tequila>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Calvados>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#AppleJack>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Armagnac>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cognac>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Grappa>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Pisco>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Genever>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#LondonDryGin>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OldTomGin>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Baijiu>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cachaca>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BataviaArrack>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Rum>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#OverproofRum>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DarkRum>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Dairy>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BlackStrapRum>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#DemeraraRum>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RhumAgricole>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Bourbon>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#rye>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#IrishWhiskey>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Scotch>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#IslayScotch>",
-                            "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#BlendedScotch>"]
-        available = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                    { 
-                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    }""")) for inner in outer])
-
-        for i in range(len(self.flist)):
-            print(self.ing_dict[self.tlist[i].get()])
-            results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
-                { 
-                    ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                    ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                    ?y (owl:equivalentClass|^owl:equivalentClass)* """+self.ing_dict[self.tlist[i].get()]+""" . 
-                }""")) for inner in outer])
-            if self.flist[i].get() == "contains":
-                available = available & results
-            elif self.flist[i].get() == "omits":
-                available = available - results
-
 
         # Create a new toplevel window to display the advanced query
-        self.q_window = tk.Toplevel(self)
+        self.gen_window = tk.Toplevel(self)
         x, y = self.winfo_x(), self.winfo_y()
-        self.q_window.geometry(f"600x500+{x}+{y}")
-        self.q_window.title("Advanced Query")
-
+        self.gen_window.geometry(f"600x500+{x}+{y}")
+        self.gen_window.title("Advanced Query")
+        self.gen_window.config(bg="#2A3439")
 
         # Create a new frame to hold the advanced query interface
-        q_frame = tk.Frame(self.q_window, bg="#2A3439", width="550", height="450")
-        q_frame.pack(padx=10, pady=10, fill="both", expand=True)
+        gen_frame = tk.Frame(self.gen_window, bg="#2A3439", width="550", height="450")
+        gen_frame.pack(padx=10, pady=10,expand=True)
+        
+        ql = tk.Label(gen_frame, text="Menu Generator", font=(("Courier New Bold"), 10), fg="#9F4576")
+        ql.pack(anchor="nw", padx=10, pady=10)
+
+        self.prog = tk.Label(gen_frame, text="LOADING MENU\n[      ]", font=(("Courier New Bold"), 10))
+        self.prog.pack(pady=20)
 
 
-        # Add a label to the advanced query frame
-        ql = tk.Label(q_frame, text="Advanced Query", font=(("Courier New Bold"), 10), fg="#9F4576")
-        ql.place(x=20, y=20)
-        # Add a button to return to the main interface
-        bb = tk.Button(q_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.advanced_query(), fg="#E3DAC9", bg="#007EA7")
-        bb.place(x=20, y=55)
+        self.gen_window.grab_set()
+        self.gen_window.resizable(False, False)
+        self.menu_drinks = []
+        def gener():
+            acceptable_spirits = [
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Tequila>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Calvados>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Armagnac>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cognac>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Pisco>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Genever>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Gin>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Baijiu>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cachaca>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Rum>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#RhumAgricole>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Bourbon>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Scotch>"]
+            
+            selections = random.sample(acceptable_spirits, 2)
+            print(selections)
+            alts = [
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Tequila>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cognac>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#LondonDryGin>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Rum>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Vodka>",
+                                "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Bourbon>"]
+            
+            for i in range(len(selections)):
+                results = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+selections[i]+""" . 
+                    }""")) for inner in outer]
+                if results == []:
+                    while results == []:
+                        results = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                        { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+random.choice(alts)+""" . 
+                        }""")) for inner in outer]
+                drink_choice = random.choice(results)
+                if drink_choice not in self.menu_drinks:
+                    self.menu_drinks.append(drink_choice)
+                else:
+                    while drink_choice in self.menu_drinks:
+                        drink_choice = random.choice(results)
+                    self.menu_drinks.append(drink_choice)
+                pbar = "".join(["-" for j in range(i+1)])
+                pspace = "".join([" " for j in range(6-i)])
+                progtext = "LOADING MENU\n["+pbar+pspace+"]"
+                self.prog.config(text=progtext)
+                self.gen_window.update_idletasks()
+                bb = tk.Button(gen_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.gen_window), fg="#E3DAC9", bg="#007EA7")
+            bb.pack(anchor="nw", padx=10, pady=10)
+            self.prog.pack_forget()
+
+            can = tk.Canvas(gen_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+            can.pack(side="left",pady=90, anchor="n")
+            tframe = tk.Frame(can,bg="#2A3439", height=500, width=400)
+            tframe.pack_propagate(False)
+
+            for cocktail in self.menu_drinks:
+                name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cocktail)[15:]).lower()
+
+                ingredients = cocktail.comment[0]
+                preperation = cocktail.comment[1]
+                garnish = cocktail.comment[2]
+
+                tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
+
+                tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(tframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                tk.Label(tframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                ttk.Separator(tframe, orient="horizontal").pack(fill="x",pady=10)
+
+            sb = tk.Scrollbar(gen_frame, orient="vertical")
+            sb.configure(command=can.yview)
+
+            sb.pack(side="right", fill="y")
+            can.configure(scrollregion=can.bbox("all"))
+            can.configure(yscrollcommand=sb.set)
+            can.bind('<Configure>', lambda x: can.configure(scrollregion=can.bbox("all")))
+            gen_frame.bind("<Configure>", lambda event: can.configure(scrollregion=gen_frame.bbox("all")))
+
+            can.create_window((275, 225), window=tframe)
+            self.gen_window.geometry(f"600x501+{x}+{y}")
+            can.yview_moveto(0)
+
+        self.after(1000, gener)
+        
 
         
-        q_can = tk.Canvas(q_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
-        q_can.place(x=0,y=100)
-        subf=tk.Frame(q_can, width=550, height=450, borderwidth=0, highlightthickness=0,bg="#2A3439")
-
-
-        q_can.create_window((300, 250), window=subf, anchor="center")
-
-        self.q_window.grab_set()
-        self.q_window.resizable(False, False)
 
 
 
