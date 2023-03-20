@@ -407,9 +407,10 @@ class App(tk.Tk):
         
         self.advanced_window.geometry(f"600x500+{x}+{y}")
         self.advanced_window.title("Advanced Query")
+        self.advanced_window.config(bg="#2A3439")
 
         # Create a new frame to hold the advanced query interface
-        advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="550", height="450", borderwidth = 0)
+        advanced_frame = tk.Frame(self.advanced_window, bg="#2A3439", width="600", height="500", borderwidth = 0,highlightthickness=0)
         advanced_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
         
@@ -423,7 +424,6 @@ class App(tk.Tk):
             self.advanced_window.grab_set()
             if self.rowc >=6:
                 addbut.config(bg="grey")
-
             if self.rowc>=7:
                 return
             ssf = tk.Frame(subf, borderwidth=0, highlightthickness=0, height=30, width=400, bg="#2A3439")
