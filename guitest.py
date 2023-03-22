@@ -3,12 +3,19 @@ import tkinter as tk
 from ast import literal_eval
 from tkinter import *
 from tkinter import font, ttk
+from tkinter import filedialog
 import random
+
+import jinja2
+import pdfkit
 
 import owlready2
 import PIL
 from owlready2 import *
 from PIL import Image, ImageShow, ImageTk
+
+import pandas as pd
+import dataframe_image as dfi
 
 ImageShow.WindowsViewer.format = "PNG"
 
@@ -132,11 +139,28 @@ class App(tk.Tk):
         self.cocktail_listbox.config(yscrollcommand=scrollbar.set, width=50,bg="#2A3439", font=(("Courier New Bold"), 10),fg="#E3DAC9")
         scrollbar.config(command=self.cocktail_listbox.yview)
         self.cocktail_listbox.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+        def findall():
+            aller = set([inner for outer in list(graph.query_owlready("""SELECT ?z WHERE 
+                    { 
+                        """+self.match+""" rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#containsAllergen> ; owl:someValuesFrom ?z] .
+                    }""")) for inner in outer])
+            aller = [str(a)[15:] for a in aller]
+            if len(aller) == 0:
+                txt = "Contains No Major Allergens"
+            elif len(aller) == 1:
+                txt = "contains allergen: " +aller[0]
+            else:
+                txt = "contains allergens: " + ", ".join(aller)
+            self.alabel.config(text = txt)
+
+
         def disp():
             x, y = self.winfo_x(), self.winfo_y()
             self.withdraw()
 
             self.displ = tk.Toplevel(self)
+            self.displ.config(bg="#2A3439")
             
             self.displ.geometry(f"600x500+{x}+{y}")
             dispframe = tk.Frame(self.displ, bg="#2A3439", width="550", height="450", borderwidth = 0)
@@ -145,12 +169,13 @@ class App(tk.Tk):
                 selectedCocktail = self.cocktail_listbox.get(self.cocktail_listbox.curselection())
                 self.displ.title(selectedCocktail)
 
-                match = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"+difflib.get_close_matches(selectedCocktail, cocktailz)[0]+">"
+                self.match = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"+difflib.get_close_matches(selectedCocktail, cocktailz)[0]+">"
                 selc = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
-                        ?x rdfs:subClassOf* """+match+""" .
+                        ?x rdfs:subClassOf* """+self.match+""" .
                     }""")) for inner in outer][0]
-                print(selc)
+                
+                txt="loading allergens"
                 ingredients = selc.comment[0]
                 preperation = selc.comment[1]
                 garnish = selc.comment[2]
@@ -161,6 +186,10 @@ class App(tk.Tk):
                 tk.Label(dispframe, text=preperation, font=(("Courier New Bold"), 10), wraplength=420, justify="center", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
 
                 tk.Label(dispframe, text=garnish, font=(("Courier New Bold"), 10), wraplength=420, justify="center",bg="#2A3439",fg="#E3DAC9").pack(pady=10)
+
+                self.alabel = tk.Label(dispframe, text=txt, font=(("Courier New Bold"), 10), wraplength=420, justify="center",bg="#2A3439",fg="#E3DAC9")
+                self.alabel.pack(pady=10)
+                self.after(1000, findall)
             except:
                 pass
 
@@ -205,6 +234,7 @@ class App(tk.Tk):
     def menugen(self):
         # Hide the main window
         self.withdraw()
+        context = {}
 
         # Create a new toplevel window to display the advanced query
         self.gen_window = tk.Toplevel(self)
@@ -213,9 +243,9 @@ class App(tk.Tk):
         self.gen_window.title("Advanced Query")
         self.gen_window.config(bg="#2A3439")
 
-        # Create a new frame to hold the advanced query interface
-        gen_frame = tk.Frame(self.gen_window, bg="#2A3439", width="550", height="450")
-        gen_frame.pack(padx=10, pady=10,expand=True)
+        # Create a new frame to hold the buttons and title
+        gen_frame = tk.Frame(self.gen_window, bg="#2A3439")
+        gen_frame.pack(padx=10, pady=10)
         
         ql = tk.Label(gen_frame, text="Menu Generator", font=(("Courier New Bold"), 10), fg="#9F4576")
         ql.pack(anchor="nw", padx=10, pady=10)
@@ -223,10 +253,62 @@ class App(tk.Tk):
         self.prog = tk.Label(gen_frame, text="LOADING MENU\n[      ]", font=(("Courier New Bold"), 10))
         self.prog.pack(pady=20)
 
+        can = tk.Canvas(gen_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
+        can.pack(side="left",pady=90, anchor="n")
+        tframe = tk.Frame(can,bg="#2A3439", height=400, width=500)
 
         self.gen_window.grab_set()
         self.gen_window.resizable(False, False)
         self.menu_drinks = []
+
+        def exp_mat():
+            cont_d = {"Celery" : [],
+                        "Crustaceans" : [],
+                        "Eggs" : [],
+                        "Fish" : [],
+                        "Gluten" : [],
+                        "Lupin" : [],
+                        "Dairy" : [],
+                        "Molluscs" : [],
+                        "Mustard" : [],
+                        "Peanuts" : [],
+                        "Sesame" : [],
+                        "Soybeans" : [],
+                        "Sulphites" : [],
+                        "TreeNuts" : []}
+            for d in self.menu_drinks:
+                sc = "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#"+difflib.get_close_matches(str(d)[15:], cocktailz)[0]+">"
+                contained_alls = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        """+sc+""" rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#containsAllergen> ; owl:someValuesFrom ?x] . 
+                    }""")) for inner in outer]
+                for a in contained_alls:
+                    a = str(a)[15:]
+                    cont_d[a].append(re.sub(r"(?<=\w)([A-Z])", r" \1",str(d)[15:]).lower())
+
+            for k in list(cont_d.keys()):
+                cont_d[k] = list(set(cont_d[k]))
+
+            xc = list(cont_d.keys())
+            yc = [re.sub(r"(?<=\w)([A-Z])", r" \1",str(d)[15:]).lower() for d in self.menu_drinks]
+
+
+            mat = [[] for i in range(7)]
+            for ct, cocktail in enumerate(yc):
+                for allergen in xc:
+                    if cocktail in cont_d[allergen]:
+                        mat[ct].append("Y")
+                    else:
+                        mat[ct].append("n")
+
+            data = pd.DataFrame(data = mat, index = yc, columns = xc)
+            dfi.export(data, "matrix.png")
+            
+
+
+            
+
         def gener():
             acceptable_spirits = [
                                 "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
@@ -245,8 +327,7 @@ class App(tk.Tk):
                                 "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Bourbon>",
                                 "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Scotch>"]
             
-            selections = random.sample(acceptable_spirits, 2)
-            print(selections)
+            selections = random.sample(acceptable_spirits, 7)
             alts = [
                                 "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Mezcal>",
                                 "<http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Tequila>",
@@ -260,16 +341,14 @@ class App(tk.Tk):
                 results = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+selections[i]+""" . 
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom """+selections[i]+"""] .
                     }""")) for inner in outer]
                 if results == []:
                     while results == []:
                         results = [inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                         { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
-                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+random.choice(alts)+""" . 
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom """+random.choice(alts)+"""] .
                         }""")) for inner in outer]
                 drink_choice = random.choice(results)
                 if drink_choice not in self.menu_drinks:
@@ -283,24 +362,30 @@ class App(tk.Tk):
                 progtext = "LOADING MENU\n["+pbar+pspace+"]"
                 self.prog.config(text=progtext)
                 self.gen_window.update_idletasks()
+
             bb = tk.Button(gen_frame, text="back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.gen_window), fg="#E3DAC9", bg="#007EA7")
-            nm = tk.Button(gen_frame, text="generate new menu", font=(("Courier New Bold"), 10), command=lambda: self.generate_new(self.gen_window), fg="#E3DAC9", bg="#007EA7")
-            bb.pack(anchor="nw", padx=10, pady=10)
-            nm.pack(anchor="nw", padx=10, pady=10)
+            nm = tk.Button(gen_frame, text="generate new menu", font=(("Courier New Bold"), 10), command=lambda: self.generate_new(self.gen_window), bg="#377771", fg="#E3DAC9")
+            em = tk.Button(gen_frame, text="export menu", font=(("Courier New Bold"), 10), command=exp, bg="#377771", fg="#E3DAC9")
+            mm = tk.Button(gen_frame, text="export allergen matrix", font=(("Courier New Bold"), 10), command=exp_mat, bg="#377771", fg="#E3DAC9")
+
+
+            bb.place(x=10,y=40)
+            nm.place(x=60,y=40)
+            em.place(x=10, y=70)
+            mm.place(x=115, y=70)
             self.prog.pack_forget()
+            
 
-            can = tk.Canvas(gen_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
-            can.pack(side="left",pady=90, anchor="n")
-            tframe = tk.Frame(can,bg="#2A3439", height=500, width=400)
-            tframe.pack_propagate(False)
-
-            for cocktail in self.menu_drinks:
+            for ct, cocktail in enumerate(self.menu_drinks):
                 name = re.sub(r"(?<=\w)([A-Z])", r" \1",str(cocktail)[15:]).lower()
 
                 ingredients = cocktail.comment[0]
                 preperation = cocktail.comment[1]
                 garnish = cocktail.comment[2]
-
+                context["c"+str(ct+1)] = name
+                context["i"+str(ct+1)] = ingredients
+                context["p"+str(ct+1)] = preperation
+                context["g"+str(ct+1)] = garnish
                 tk.Label(tframe, text=name, font=(("Courier New Bold"), 13), wraplength=220, justify="center", anchor="w").pack(pady=10)
 
                 tk.Label(tframe, text=ingredients, font=(("Courier New Bold"), 10), wraplength=420, justify="center", anchor="w", bg="#2A3439",fg="#E3DAC9").pack(pady=10)
@@ -319,17 +404,24 @@ class App(tk.Tk):
             can.configure(yscrollcommand=sb.set)
             can.bind('<Configure>', lambda x: can.configure(scrollregion=can.bbox("all")))
             gen_frame.bind("<Configure>", lambda event: can.configure(scrollregion=gen_frame.bbox("all")))
-
-            can.create_window((275, 225), window=tframe)
+            can.create_window((275, 225), window=tframe, anchor="n")
             self.gen_window.geometry(f"600x501+{x}+{y}")
             can.yview_moveto(0)
 
         self.after(1000, gener)
+
+        def exp():
+            template_loader = jinja2.FileSystemLoader("./")
+            template_env = jinja2.Environment(loader=template_loader)
+
+            template = template_env.get_template("menutemplate.html")
+            outputtxt = template.render(context)
+
+            path = filedialog.asksaveasfilename(filetypes=([("PDF files","*.pdf")]), defaultextension=".pdf")
+
+            conf = pdfkit.configuration(wkhtmltopdf="C:\Program Files\wkhtmltopdf\\bin\wkhtmltopdf.exe")
+            pdfkit.from_string(outputtxt, path, configuration=conf)
         
-
-        
-
-
 
     def allergen_search(self):
           # Hide the main window
@@ -349,9 +441,9 @@ class App(tk.Tk):
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
                         ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
-                        ?y (owl:equivalentClass|^owl:equivalentClass)* """+avoid+""" . 
+                        ?y rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#containsAllergen> ; owl:someValuesFrom """+avoid+"""]
                     }""")) for inner in outer])
-
+                print(bad)
                 acceptable -= bad
             
             if list(acceptable) == []:
@@ -616,21 +708,27 @@ class App(tk.Tk):
             for i in range(len(self.flist)):
                 if self.slist[i].get() == "ingredient":
                     v = self.ing_dict[self.tlist[i].get()]
-                elif self.slist[i].get() == "allergen":
-                    v = self.allergen_dict[self.tlist[i].get()]
-                results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
                     { 
                         ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
                         ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
                         ?y (owl:equivalentClass|^owl:equivalentClass)* """+v+""" . 
                     }""")) for inner in outer])
+                elif self.slist[i].get() == "allergen":
+                    v = self.allergen_dict[self.tlist[i].get()]
+                    results = set([inner for outer in list(graph.query_owlready("""SELECT ?x WHERE 
+                    { 
+                        ?x rdfs:subClassOf+ <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#Cocktail> .
+                        ?x rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#contains> ; owl:someValuesFrom ?y] .
+                        ?y rdfs:subClassOf [a owl:Restriction ; owl:onProperty <http://www.semanticweb.org/szure/ontologies/2023/1/untitled-ontology-3#containsAllergen> ; owl:someValuesFrom """+v+"""] . 
+                    }""")) for inner in outer])
+                
                 if self.flist[i].get() == "contains":
                     available = available & results
                 elif self.flist[i].get() == "omits":
                     available = available - results
 
             self.final = list(available)
-            print(self.final)
             display_results()
             q_can.yview_moveto(0.0)
 
@@ -643,6 +741,7 @@ class App(tk.Tk):
 
         # Create a new toplevel window to display the advanced query
         self.q_window = tk.Toplevel(self)
+        self.q_window.config(bg="#2A3439")
         x, y = self.winfo_x(), self.winfo_y()
         self.q_window.geometry(f"600x500+{x}+{y}")
         self.q_window.title("Advanced Query Results")
