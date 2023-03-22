@@ -283,8 +283,10 @@ class App(tk.Tk):
                 progtext = "LOADING MENU\n["+pbar+pspace+"]"
                 self.prog.config(text=progtext)
                 self.gen_window.update_idletasks()
-                bb = tk.Button(gen_frame, text="Back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.gen_window), fg="#E3DAC9", bg="#007EA7")
+            bb = tk.Button(gen_frame, text="back", font=(("Courier New Bold"), 10), command=lambda: self.back_to_main(self.gen_window), fg="#E3DAC9", bg="#007EA7")
+            nm = tk.Button(gen_frame, text="generate new menu", font=(("Courier New Bold"), 10), command=lambda: self.generate_new(self.gen_window), fg="#E3DAC9", bg="#007EA7")
             bb.pack(anchor="nw", padx=10, pady=10)
+            nm.pack(anchor="nw", padx=10, pady=10)
             self.prog.pack_forget()
 
             can = tk.Canvas(gen_frame, width=550, height=450, bg="#2A3439",borderwidth = 0,highlightthickness=0)
@@ -680,6 +682,14 @@ class App(tk.Tk):
         # Show the main window
         self.deiconify()
 
+    def generate_new(self, f):
+        # Store the position of the advanced query window before it is closed
+        x, y = f.winfo_x(), f.winfo_y()
+        self.geometry(f"600x500+{x}+{y}")
+        f.destroy()
+        
+        # Show the main window
+        self.menugen()
 
 
 app = App()
